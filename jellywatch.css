@@ -2,88 +2,107 @@
  * JELLYWATCH – Theme für Jellyfin 12 (Logo: ECLIPSE)
  * https://github.com/Soluk09/Jellywatch
  *
- * Reines CSS. Keine externen Dateien, kein @import, keine Schriften oder Bilder
- * aus dem Internet, kein JavaScript. Das Theme lädt nichts nach und sendet nichts.
+ * Reines CSS: kein JavaScript, kein @import, keine Dateien oder Schriften aus dem Internet.
  *
- * Installation: Den GESAMTEN Inhalt dieser Datei in
- *   Profilbild → Übersicht (Dashboard) → Branding → "Benutzerdefinierter CSS-Code"
- *   einfügen → Speichern → Seite mit Strg+F5 neu laden.
+ * Installation: den gesamten Inhalt dieser Datei in
+ *   Profilbild → Übersicht → Branding → "Benutzerdefinierter CSS-Code" einfügen,
+ *   speichern und die Seite mit Strg+F5 neu laden.
  *
- * Farbvariante wählen (jeder Benutzer selbst):
- *   Einstellungen → Anzeige → Theme
- *     Dark          → Rot / Schwarz   (Standard)
- *     WMC           → Schwarz / Weiss (Mono)
- *     Light         → Weiss / Schwarz (hell)
- *     Apple TV      → Weiss / Rot     (hell)
- *     Blue Radiance → Blau / Schwarz
- *     Purple Haze   → Violett / Schwarz
+ * Farbe (jeder Benutzer selbst): Einstellungen → Anzeige → Theme
+ *   Dark          → Blau / Schwarz (Standard)
+ *   Blue Radiance → Rot / Schwarz
+ *   WMC           → Schwarz / Weiss
+ *   Light         → Weiss / Schwarz (hell)
+ *   Apple TV      → Weiss / Blau (hell)
+ *   Purple Haze   → Violett / Schwarz
  *
- * Eigene Anpassungen UNTER diesem Theme einfügen, z.B.:
+ * Eigene Werte unter dem Theme einfügen, z.B.:
  *   :root { --jw-brand: "MEINKINO"; --jw-hero-interval: 9s; }
  */
 
 /* =========================================================================
-   1. EINSTELLUNGEN (können überschrieben werden)
+   1. EINSTELLUNGEN
    ========================================================================= */
 :where(:root) {
     --jw-brand: "ECLIPSE";
-    --jw-hero-label: "NEU HINZUGEFÜGT";
     --jw-hero-play: "Abspielen";
     --jw-hero-interval: 7s;
-    --jw-hero-height: clamp(360px, 60vh, 640px);
-    --jw-hero-height-mobile: clamp(420px, 74vh, 620px);
+    --jw-hero-height: clamp(340px, 56vh, 600px);
+    --jw-hero-height-mobile: clamp(420px, 72vh, 600px);
 
-    --jw-font-display: "Inter Tight", "Inter", "SF Pro Display", "Segoe UI Variable Display", "Segoe UI", "Noto Sans", system-ui, sans-serif;
-    --jw-r-sm: 8px;
-    --jw-r: 14px;
-    --jw-r-lg: 22px;
-    --jw-r-pill: 999px;
+    --jw-font-display: "Segoe UI Variable Display", "Segoe UI", "SF Pro Display", -apple-system, "Noto Sans", system-ui, sans-serif;
+    --jw-r-sm: 6px;
+    --jw-r: 8px;
+    --jw-r-lg: 14px;
     --jw-gutter: max(3.3vw, env(safe-area-inset-left, 0px));
-    --jw-ease: cubic-bezier(.2, .8, .2, 1);
 }
 
-/* Englische Texte, wenn Jellyfin nicht auf Deutsch läuft */
 :where(html:not(:lang(de))) {
-    --jw-hero-label: "NEW ARRIVAL";
     --jw-hero-play: "Play";
 }
 
 /* =========================================================================
-   2. FARBVARIANTEN (gekoppelt an Einstellungen → Anzeige → Theme)
+   2. FARBVARIANTEN (Einstellungen → Anzeige → Theme)
    ========================================================================= */
 
-/* Rot / Schwarz – Standard ("Dark") */
+/* Blau / Schwarz – Standard ("Dark") */
 :where(:root),
 :where(html[data-theme="dark"]) {
     --jw-scheme: dark;
-    --jw-accent: #e50914;
-    --jw-accent-ch: 229 9 20;
-    --jw-accent-hi: #ff2b36;
-    --jw-accent-lo: #b0060f;
-    --jw-accent-text: #ff4b54;
+    --jw-accent: #2f6fe6;
+    --jw-accent-ch: 47 111 230;
+    --jw-accent-hi: #4a86f0;
+    --jw-accent-lo: #2459c4;
+    --jw-accent-text: #7eaaff;
     --jw-on-accent: #ffffff;
     --jw-on-accent-ch: 255 255 255;
-    --jw-hero-accent: #e50914;
-    --jw-hero-accent-ch: 229 9 20;
+    --jw-hero-accent: #2f6fe6;
+    --jw-hero-accent-ch: 47 111 230;
     --jw-hero-on-accent: #ffffff;
-    --jw-bg: #070709;
-    --jw-bg-ch: 7 7 9;
-    --jw-surface: #111115;
-    --jw-surface-ch: 17 17 21;
-    --jw-surface-2: #18181d;
-    --jw-surface-3: #22222a;
-    --jw-text: #f5f5f7;
-    --jw-text-ch: 245 245 247;
-    --jw-text-2: rgb(245 245 247 / .70);
-    --jw-text-3: rgb(245 245 247 / .46);
+    --jw-bg: #080b12;
+    --jw-bg-ch: 8 11 18;
+    --jw-surface: #10151f;
+    --jw-surface-ch: 16 21 31;
+    --jw-surface-2: #161c28;
+    --jw-surface-3: #1f2635;
+    --jw-text: #eef1f6;
+    --jw-text-ch: 238 241 246;
+    --jw-text-2: rgb(238 241 246 / .70);
+    --jw-text-3: rgb(238 241 246 / .48);
     --jw-line: rgb(255 255 255 / .08);
-    --jw-line-2: rgb(255 255 255 / .16);
-    --jw-shade-ch: 6 6 8;
-    --jw-glow-1: rgb(229 9 20 / .16);
-    --jw-glow-2: rgb(229 9 20 / .07);
+    --jw-line-2: rgb(255 255 255 / .15);
+    --jw-shade-ch: 6 8 14;
 }
 
-/* Schwarz / Weiss – Mono ("WMC") */
+/* Rot / Schwarz ("Blue Radiance") */
+:where(html[data-theme="blueradiance"]) {
+    --jw-scheme: dark;
+    --jw-accent: #dc1f2e;
+    --jw-accent-ch: 220 31 46;
+    --jw-accent-hi: #ee3646;
+    --jw-accent-lo: #b3121f;
+    --jw-accent-text: #ff6670;
+    --jw-on-accent: #ffffff;
+    --jw-on-accent-ch: 255 255 255;
+    --jw-hero-accent: #dc1f2e;
+    --jw-hero-accent-ch: 220 31 46;
+    --jw-hero-on-accent: #ffffff;
+    --jw-bg: #09090b;
+    --jw-bg-ch: 9 9 11;
+    --jw-surface: #131316;
+    --jw-surface-ch: 19 19 22;
+    --jw-surface-2: #1a1a1e;
+    --jw-surface-3: #242429;
+    --jw-text: #f2f2f4;
+    --jw-text-ch: 242 242 244;
+    --jw-text-2: rgb(242 242 244 / .70);
+    --jw-text-3: rgb(242 242 244 / .48);
+    --jw-line: rgb(255 255 255 / .08);
+    --jw-line-2: rgb(255 255 255 / .15);
+    --jw-shade-ch: 7 7 9;
+}
+
+/* Schwarz / Weiss ("WMC") */
 :where(html[data-theme="wmc"]) {
     --jw-scheme: dark;
     --jw-accent: #ffffff;
@@ -98,19 +117,17 @@
     --jw-hero-on-accent: #000000;
     --jw-bg: #000000;
     --jw-bg-ch: 0 0 0;
-    --jw-surface: #0d0d0d;
-    --jw-surface-ch: 13 13 13;
+    --jw-surface: #0e0e0e;
+    --jw-surface-ch: 14 14 14;
     --jw-surface-2: #161616;
     --jw-surface-3: #222222;
     --jw-text: #ffffff;
     --jw-text-ch: 255 255 255;
     --jw-text-2: rgb(255 255 255 / .68);
-    --jw-text-3: rgb(255 255 255 / .44);
+    --jw-text-3: rgb(255 255 255 / .45);
     --jw-line: rgb(255 255 255 / .09);
     --jw-line-2: rgb(255 255 255 / .18);
     --jw-shade-ch: 0 0 0;
-    --jw-glow-1: rgb(255 255 255 / .07);
-    --jw-glow-2: rgb(255 255 255 / .03);
 }
 
 /* Weiss / Schwarz – hell ("Light") */
@@ -138,99 +155,63 @@
     --jw-text-3: rgb(11 11 13 / .46);
     --jw-line: rgb(0 0 0 / .08);
     --jw-line-2: rgb(0 0 0 / .16);
-    --jw-shade-ch: 8 8 10;
-    --jw-glow-1: rgb(0 0 0 / .05);
-    --jw-glow-2: rgb(0 0 0 / .03);
+    --jw-shade-ch: 10 10 12;
 }
 
-/* Weiss / Rot – hell ("Apple TV") */
+/* Weiss / Blau – hell ("Apple TV") */
 :where(html[data-theme="appletv"]) {
     --jw-scheme: light;
-    --jw-accent: #d80b16;
-    --jw-accent-ch: 216 11 22;
-    --jw-accent-hi: #f01521;
-    --jw-accent-lo: #a6060f;
-    --jw-accent-text: #c4000b;
+    --jw-accent: #1f5fd6;
+    --jw-accent-ch: 31 95 214;
+    --jw-accent-hi: #3a74e0;
+    --jw-accent-lo: #1a4fb3;
+    --jw-accent-text: #1a55c4;
     --jw-on-accent: #ffffff;
     --jw-on-accent-ch: 255 255 255;
-    --jw-hero-accent: #e50914;
-    --jw-hero-accent-ch: 229 9 20;
+    --jw-hero-accent: #2f6fe6;
+    --jw-hero-accent-ch: 47 111 230;
     --jw-hero-on-accent: #ffffff;
-    --jw-bg: #f4f4f6;
-    --jw-bg-ch: 244 244 246;
+    --jw-bg: #f3f5f9;
+    --jw-bg-ch: 243 245 249;
     --jw-surface: #ffffff;
     --jw-surface-ch: 255 255 255;
-    --jw-surface-2: #ededf1;
-    --jw-surface-3: #e1e1e7;
-    --jw-text: #0b0b0d;
-    --jw-text-ch: 11 11 13;
-    --jw-text-2: rgb(11 11 13 / .68);
-    --jw-text-3: rgb(11 11 13 / .46);
+    --jw-surface-2: #eaeef5;
+    --jw-surface-3: #dfe4ee;
+    --jw-text: #0c1018;
+    --jw-text-ch: 12 16 24;
+    --jw-text-2: rgb(12 16 24 / .68);
+    --jw-text-3: rgb(12 16 24 / .46);
     --jw-line: rgb(0 0 0 / .08);
     --jw-line-2: rgb(0 0 0 / .16);
-    --jw-shade-ch: 8 8 10;
-    --jw-glow-1: rgb(216 11 22 / .07);
-    --jw-glow-2: rgb(216 11 22 / .04);
-}
-
-/* Blau / Schwarz ("Blue Radiance") */
-:where(html[data-theme="blueradiance"]) {
-    --jw-scheme: dark;
-    --jw-accent: #2f7dff;
-    --jw-accent-ch: 47 125 255;
-    --jw-accent-hi: #5b9aff;
-    --jw-accent-lo: #1d5fd1;
-    --jw-accent-text: #6ea8ff;
-    --jw-on-accent: #ffffff;
-    --jw-on-accent-ch: 255 255 255;
-    --jw-hero-accent: #2f7dff;
-    --jw-hero-accent-ch: 47 125 255;
-    --jw-hero-on-accent: #ffffff;
-    --jw-bg: #05070d;
-    --jw-bg-ch: 5 7 13;
-    --jw-surface: #0e1220;
-    --jw-surface-ch: 14 18 32;
-    --jw-surface-2: #151a2b;
-    --jw-surface-3: #1e2538;
-    --jw-text: #f2f5fb;
-    --jw-text-ch: 242 245 251;
-    --jw-text-2: rgb(242 245 251 / .70);
-    --jw-text-3: rgb(242 245 251 / .46);
-    --jw-line: rgb(255 255 255 / .08);
-    --jw-line-2: rgb(255 255 255 / .16);
-    --jw-shade-ch: 4 6 12;
-    --jw-glow-1: rgb(47 125 255 / .16);
-    --jw-glow-2: rgb(47 125 255 / .07);
+    --jw-shade-ch: 8 10 16;
 }
 
 /* Violett / Schwarz ("Purple Haze") */
 :where(html[data-theme="purplehaze"]) {
     --jw-scheme: dark;
-    --jw-accent: #8b5cf6;
-    --jw-accent-ch: 139 92 246;
-    --jw-accent-hi: #a682ff;
-    --jw-accent-lo: #6d3fe0;
-    --jw-accent-text: #b69cff;
+    --jw-accent: #7c5cf0;
+    --jw-accent-ch: 124 92 240;
+    --jw-accent-hi: #9479f5;
+    --jw-accent-lo: #6243d6;
+    --jw-accent-text: #ad98ff;
     --jw-on-accent: #ffffff;
     --jw-on-accent-ch: 255 255 255;
-    --jw-hero-accent: #8b5cf6;
-    --jw-hero-accent-ch: 139 92 246;
+    --jw-hero-accent: #7c5cf0;
+    --jw-hero-accent-ch: 124 92 240;
     --jw-hero-on-accent: #ffffff;
-    --jw-bg: #08060f;
-    --jw-bg-ch: 8 6 15;
-    --jw-surface: #120f1d;
-    --jw-surface-ch: 18 15 29;
-    --jw-surface-2: #1a1628;
-    --jw-surface-3: #241f36;
-    --jw-text: #f6f3ff;
-    --jw-text-ch: 246 243 255;
-    --jw-text-2: rgb(246 243 255 / .70);
-    --jw-text-3: rgb(246 243 255 / .46);
+    --jw-bg: #09080f;
+    --jw-bg-ch: 9 8 15;
+    --jw-surface: #13111c;
+    --jw-surface-ch: 19 17 28;
+    --jw-surface-2: #1a1726;
+    --jw-surface-3: #242034;
+    --jw-text: #f3f1fa;
+    --jw-text-ch: 243 241 250;
+    --jw-text-2: rgb(243 241 250 / .70);
+    --jw-text-3: rgb(243 241 250 / .48);
     --jw-line: rgb(255 255 255 / .08);
-    --jw-line-2: rgb(255 255 255 / .16);
-    --jw-shade-ch: 7 5 13;
-    --jw-glow-1: rgb(139 92 246 / .18);
-    --jw-glow-2: rgb(139 92 246 / .08);
+    --jw-line-2: rgb(255 255 255 / .15);
+    --jw-shade-ch: 8 7 13;
 }
 
 /* Jellyfin- und MUI-Farben auf die Theme-Farben umleiten */
@@ -254,9 +235,7 @@ html:not([data-theme]) {
     --jf-palette-background-defaultChannel: var(--jw-bg-ch);
     --jf-palette-background-paper: var(--jw-surface);
     --jf-palette-background-paperChannel: var(--jw-surface-ch);
-    --jf-palette-background-defaultImage:
-        radial-gradient(1100px 620px at 88% -12%, var(--jw-glow-1), transparent 62%),
-        radial-gradient(900px 560px at -8% 108%, var(--jw-glow-2), transparent 60%);
+    --jf-palette-background-defaultImage: none;
 
     --jf-palette-text-primary: var(--jw-text);
     --jf-palette-text-primaryChannel: var(--jw-text-ch);
@@ -265,21 +244,21 @@ html:not([data-theme]) {
     --jf-palette-text-disabled: var(--jw-text-3);
     --jf-palette-divider: var(--jw-line);
     --jf-palette-action-active: var(--jw-text);
-    --jf-palette-action-hover: rgb(var(--jw-text-ch) / .07);
-    --jf-palette-action-selected: rgb(var(--jw-text-ch) / .12);
-    --jf-palette-action-focus: rgb(var(--jw-text-ch) / .12);
+    --jf-palette-action-hover: rgb(var(--jw-text-ch) / .06);
+    --jf-palette-action-selected: rgb(var(--jw-text-ch) / .10);
+    --jf-palette-action-focus: rgb(var(--jw-text-ch) / .10);
     --jf-palette-action-activeChannel: var(--jw-text-ch);
     --jf-palette-action-selectedChannel: var(--jw-text-ch);
 
-    --jf-palette-AppBar-defaultBg: rgb(var(--jw-bg-ch) / .78);
-    --jf-palette-AppBar-transparentBg: rgb(var(--jw-bg-ch) / .55);
+    --jf-palette-AppBar-defaultBg: var(--jw-bg);
+    --jf-palette-AppBar-transparentBg: rgb(var(--jw-bg-ch) / .6);
     --jf-palette-AppBar-gradient: none;
     --jf-palette-AppBar-darkBg: var(--jw-surface);
     --jf-palette-FilledInput-bg: var(--jw-surface-2);
     --jf-palette-FilledInput-hoverBg: var(--jw-surface-3);
     --jf-palette-FilledInput-borderColor: var(--jw-line);
     --jf-palette-Button-inheritContainedBg: var(--jw-surface-3);
-    --jf-palette-Button-inheritContainedHoverBg: rgb(var(--jw-text-ch) / .16);
+    --jf-palette-Button-inheritContainedHoverBg: rgb(var(--jw-text-ch) / .14);
     --jf-palette-SnackbarContent-bg: var(--jw-surface-3);
     --jf-palette-SnackbarContent-color: var(--jw-text);
     --jf-palette-Avatar-defaultBg: var(--jw-surface-3);
@@ -289,13 +268,6 @@ html:not([data-theme]) {
     --jf-palette-Alert-infoFilledColor: var(--jw-text);
     --jf-card-borderRadius: var(--jw-r);
 
-    /* Logo-Zeichen: Sonnenfinsternis = Lichtpunkt ("Diamantring") + Mond + Sonne */
-    --jw-mark:
-        radial-gradient(13% 13% at 23% 75%, #fff 0%, rgb(255 255 255 / .85) 28%, rgb(255 255 255 / 0) 100%),
-        radial-gradient(45% 45% at 61% 39%, var(--jw-bg) 0 94%, rgb(var(--jw-bg-ch) / 0) 100%),
-        radial-gradient(50% 50% at 50% 50%, var(--jw-accent-hi) 0%, var(--jw-accent) 75%, var(--jw-accent) 93%, rgb(var(--jw-accent-ch) / 0) 100%);
-    --jw-corona: 0 0 14px 0 rgb(var(--jw-accent-ch) / .6), 0 0 3px 0 rgb(var(--jw-accent-ch) / .9);
-
     --jf-overlays-1: none;
     --jf-overlays-2: none;
     --jf-overlays-3: none;
@@ -303,6 +275,12 @@ html:not([data-theme]) {
     --jf-overlays-8: none;
     --jf-overlays-16: none;
     --jf-overlays-24: none;
+
+    /* Logo-Zeichen: Sonnenfinsternis (Mond vor der Sonne) */
+    --jw-mark:
+        radial-gradient(44% 44% at 62% 38%, var(--jw-bg) 0 94%, rgb(var(--jw-bg-ch) / 0) 100%),
+        radial-gradient(50% 50% at 50% 50%, var(--jw-accent) 0 93%, rgb(var(--jw-accent-ch) / 0) 100%);
+    --jw-mark-ring: inset 0 0 0 1.5px rgb(var(--jw-accent-ch) / .45);
 }
 
 /* =========================================================================
@@ -313,18 +291,13 @@ html {
     color: var(--jw-text-2);
 }
 
-html,
-.backgroundContainer {
-    background-attachment: fixed;
-}
-
 ::selection {
-    background: rgb(var(--jw-accent-ch) / .85);
+    background: rgb(var(--jw-accent-ch) / .8);
     color: var(--jw-on-accent);
 }
 
 * {
-    scrollbar-color: rgb(var(--jw-text-ch) / .22) transparent;
+    scrollbar-color: rgb(var(--jw-text-ch) / .2) transparent;
 }
 
 ::-webkit-scrollbar-track {
@@ -337,12 +310,8 @@ html,
 
 ::-webkit-scrollbar-thumb:horizontal,
 ::-webkit-scrollbar-thumb:vertical {
-    border-radius: var(--jw-r-pill);
-    background: rgb(var(--jw-text-ch) / .22);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: rgb(var(--jw-accent-ch) / .8);
+    border-radius: 8px;
+    background: rgb(var(--jw-text-ch) / .2);
 }
 
 :where(a, button, input, select, textarea, [tabindex]):focus-visible {
@@ -357,54 +326,56 @@ html,
 .MuiTypography-h1,
 .MuiTypography-h2 {
     font-family: var(--jw-font-display);
-    letter-spacing: -.01em;
 }
 
 .backgroundContainer.withBackdrop {
-    background-color: rgb(var(--jw-bg-ch) / .88);
+    background: rgb(var(--jw-bg-ch) / .88) !important;
+}
+
+.appfooter,
+.playlistSectionButton {
+    background: var(--jw-surface) !important;
+    color: var(--jw-text-2) !important;
+    border-top: 1px solid var(--jw-line);
 }
 
 /* =========================================================================
-   4. KOPFZEILE (Jellyfin 12) + LOGO
+   4. KOPFZEILE UND LOGO
    ========================================================================= */
 header.MuiAppBar-root {
-    transition: background-color .35s var(--jw-ease), box-shadow .35s var(--jw-ease), border-color .35s;
+    transition: background-color .3s, border-color .3s;
     border-bottom: 1px solid transparent;
 }
 
 header.MuiAppBar-root.MuiAppBar-colorTransparent {
-    background: linear-gradient(to bottom, rgb(var(--jw-bg-ch) / .82), rgb(var(--jw-bg-ch) / 0)) !important;
+    background: linear-gradient(to bottom, rgb(var(--jw-bg-ch) / .85), rgb(var(--jw-bg-ch) / 0)) !important;
 }
 
 header.MuiAppBar-root.MuiAppBar-colorDefault {
-    background: rgb(var(--jw-bg-ch) / .74) !important;
-    backdrop-filter: blur(18px) saturate(1.4);
-    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    background: rgb(var(--jw-bg-ch) / .96) !important;
     border-bottom-color: var(--jw-line);
-    box-shadow: 0 12px 32px -18px rgb(0 0 0 / .7);
+    box-shadow: none !important;
 }
 
 header.MuiAppBar-root .MuiToolbar-dense {
     min-height: 56px;
 }
 
-/* Navigations-Knöpfe als Pillen */
 header.MuiAppBar-root .MuiButton-text:not([href="#/"]) {
-    border-radius: var(--jw-r-pill);
-    padding: 6px 14px;
+    border-radius: var(--jw-r);
+    padding: 6px 12px;
     color: var(--jw-text-2);
-    font-weight: 600;
-    letter-spacing: .01em;
-    transition: background-color .2s, color .2s;
+    font-weight: 500;
+    transition: background-color .15s, color .15s;
 }
 
 header.MuiAppBar-root .MuiButton-text:not([href="#/"]):hover {
-    background: rgb(var(--jw-text-ch) / .08);
+    background: rgb(var(--jw-text-ch) / .06);
     color: var(--jw-text);
 }
 
 header.MuiAppBar-root .MuiButtonGroup-grouped {
-    border-radius: 10px !important;
+    border-radius: var(--jw-r-sm) !important;
     padding: 6px 10px;
     min-width: 40px;
 }
@@ -414,54 +385,49 @@ header.MuiAppBar-root .MuiButtonGroup-text .MuiButtonGroup-grouped {
 }
 
 header.MuiAppBar-root .MuiButtonGroup-contained .MuiButtonGroup-firstButton {
-    border-radius: var(--jw-r-pill) 0 0 var(--jw-r-pill) !important;
-    padding-left: 16px;
+    border-radius: var(--jw-r) 0 0 var(--jw-r) !important;
+    padding-left: 14px;
 }
 
 header.MuiAppBar-root .MuiButtonGroup-contained .MuiButtonGroup-lastButton {
-    border-radius: 0 var(--jw-r-pill) var(--jw-r-pill) 0 !important;
-    padding-right: 14px;
+    border-radius: 0 var(--jw-r) var(--jw-r) 0 !important;
 }
 
 header.MuiAppBar-root .MuiButton-root.MuiButton-colorPrimary:not(.MuiButton-contained) {
-    background: rgb(var(--jw-accent-ch) / .16);
+    background: rgb(var(--jw-accent-ch) / .12);
     color: var(--jw-accent-text);
 }
 
-/* Links aus config.json (z.B. Seerr) hervorheben */
+/* Links aus config.json (z.B. Seerr) */
 header.MuiAppBar-root a.MuiButton-root[target="_blank"] {
     color: var(--jw-accent-text);
-    background: rgb(var(--jw-accent-ch) / .10);
-    box-shadow: inset 0 0 0 1px rgb(var(--jw-accent-ch) / .45);
+    box-shadow: inset 0 0 0 1px rgb(var(--jw-accent-ch) / .5);
 }
 
 header.MuiAppBar-root a.MuiButton-root[target="_blank"]:hover {
     background: var(--jw-accent);
     color: var(--jw-on-accent);
-    box-shadow: 0 6px 20px -6px rgb(var(--jw-accent-ch) / .8);
 }
 
 header.MuiAppBar-root .MuiIconButton-root {
     color: var(--jw-text-2);
-    transition: background-color .2s, color .2s;
 }
 
 header.MuiAppBar-root .MuiIconButton-root:hover {
     color: var(--jw-text);
-    background: rgb(var(--jw-text-ch) / .08);
+    background: rgb(var(--jw-text-ch) / .06);
 }
 
 header.MuiAppBar-root .MuiAvatar-root {
     background-color: var(--jw-surface-3);
     color: var(--jw-text);
-    box-shadow: 0 0 0 2px rgb(var(--jw-bg-ch) / 1), 0 0 0 4px rgb(var(--jw-accent-ch) / .85);
 }
 
-/* Logo: Server-Name ausblenden, Sonnenfinsternis-Zeichen + Name anzeigen */
+/* Logo: Server-Name ausblenden, Zeichen + Name anzeigen */
 header.MuiAppBar-root a.MuiButton-root[href="#/"] {
     font-size: 0 !important;
     line-height: 1;
-    padding: 6px 12px 6px 6px;
+    padding: 6px 10px 6px 6px;
     margin-right: 10px;
     border-radius: var(--jw-r);
     min-width: 0;
@@ -478,13 +444,13 @@ header.MuiAppBar-root a.MuiButton-root[href="#/"] .MuiButton-startIcon,
 #loginPage > .padded-left::before {
     border-radius: 50%;
     background: var(--jw-mark);
-    box-shadow: var(--jw-corona);
+    box-shadow: var(--jw-mark-ring);
 }
 
 header.MuiAppBar-root a.MuiButton-root[href="#/"] .MuiButton-startIcon {
-    width: 28px;
-    height: 28px;
-    margin: 0 12px 0 0;
+    width: 24px;
+    height: 24px;
+    margin: 0 10px 0 0;
 }
 
 header.MuiAppBar-root a.MuiButton-root[href="#/"] .MuiButton-startIcon img {
@@ -495,12 +461,9 @@ header.MuiAppBar-root a.MuiButton-root[href="#/"]::after,
 .skinHeader .pageTitleWithDefaultLogo::after,
 .MuiDrawer-paper a[href="#/"] .MuiListItemText-primary::after {
     content: var(--jw-brand);
-    font: 800 1.3rem/1 var(--jw-font-display);
-    letter-spacing: .17em;
-    background: linear-gradient(90deg, var(--jw-text) 0%, var(--jw-text) 42%, var(--jw-accent-text) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    font: 700 1.15rem/1 var(--jw-font-display);
+    letter-spacing: .14em;
+    color: var(--jw-text);
     white-space: nowrap;
 }
 
@@ -514,24 +477,21 @@ header.MuiAppBar-root a.MuiButton-root[href="#/"]::after,
         content: "";
         order: 1;
         flex: none;
-        width: 24px;
-        height: 24px;
-        margin: 0 10px 0 6px;
+        width: 22px;
+        height: 22px;
+        margin: 0 9px 0 6px;
         border-radius: 50%;
         background: var(--jw-mark);
-        box-shadow: var(--jw-corona);
+        box-shadow: var(--jw-mark-ring);
         pointer-events: none;
     }
 
     header.MuiAppBar-root .MuiToolbar-root:not(:has(a[href="#/"]))::after {
         content: var(--jw-brand);
         order: 1;
-        font: 800 1.12rem/1 var(--jw-font-display);
-        letter-spacing: .16em;
-        background: linear-gradient(90deg, var(--jw-text) 0%, var(--jw-text) 42%, var(--jw-accent-text) 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
+        font: 700 1.05rem/1 var(--jw-font-display);
+        letter-spacing: .14em;
+        color: var(--jw-text);
         white-space: nowrap;
         pointer-events: none;
     }
@@ -539,18 +499,16 @@ header.MuiAppBar-root a.MuiButton-root[href="#/"]::after,
 
 /* Seitenleiste (Handy) */
 .MuiDrawer-paper {
-    background: rgb(var(--jw-bg-ch) / .92) !important;
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    background: var(--jw-bg) !important;
     border-right: 1px solid var(--jw-line) !important;
 }
 
 .MuiDrawer-paper a[href="#/"] .MuiListItemIcon-root {
     flex: none;
-    width: 34px;
-    height: 34px;
+    width: 30px;
+    height: 30px;
     min-width: 0 !important;
-    margin-right: 16px;
+    margin-right: 14px;
 }
 
 .MuiDrawer-paper a[href="#/"] .MuiListItemIcon-root > * {
@@ -562,18 +520,18 @@ header.MuiAppBar-root a.MuiButton-root[href="#/"]::after,
 }
 
 .MuiDrawer-paper .MuiListItemButton-root {
-    border-radius: var(--jw-r-sm);
+    border-radius: var(--jw-r);
     margin: 2px 10px;
 }
 
 .MuiDrawer-paper .MuiListItemButton-root.Mui-selected {
-    background: rgb(var(--jw-accent-ch) / .16);
+    background: rgb(var(--jw-accent-ch) / .14);
     color: var(--jw-accent-text);
 }
 
 .MuiDrawer-paper a.MuiListItemButton-root[target="_blank"] {
     color: var(--jw-accent-text);
-    box-shadow: inset 0 0 0 1px rgb(var(--jw-accent-ch) / .4);
+    box-shadow: inset 0 0 0 1px rgb(var(--jw-accent-ch) / .45);
 }
 
 .MuiDrawer-paper a.MuiListItemButton-root[target="_blank"] .MuiListItemIcon-root {
@@ -583,14 +541,11 @@ header.MuiAppBar-root a.MuiButton-root[href="#/"]::after,
 /* Alte Kopfzeile (TV- und Legacy-Layout) */
 .skinHeader-withBackground,
 .skinHeader.semiTransparent {
-    background: rgb(var(--jw-bg-ch) / .78) !important;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgb(var(--jw-bg-ch) / .96) !important;
 }
 
 .layout-tv .skinHeader-withBackground {
     background: none !important;
-    backdrop-filter: none;
 }
 
 .skinHeader .pageTitleWithDefaultLogo {
@@ -605,9 +560,9 @@ header.MuiAppBar-root a.MuiButton-root[href="#/"]::after,
 .skinHeader .pageTitleWithDefaultLogo::before {
     content: "";
     flex: none;
-    width: 26px;
-    height: 26px;
-    margin-right: 12px;
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
 }
 
 .mainDrawer {
@@ -616,29 +571,27 @@ header.MuiAppBar-root a.MuiButton-root[href="#/"]::after,
 }
 
 .navMenuOption {
-    border-radius: var(--jw-r-sm);
+    border-radius: var(--jw-r);
     margin: 2px 8px;
 }
 
 .navMenuOption-selected {
-    background: rgb(var(--jw-accent-ch) / .18) !important;
+    background: rgb(var(--jw-accent-ch) / .16) !important;
     color: var(--jw-accent-text) !important;
 }
 
 .customMenuOptions .navMenuOption {
     color: var(--jw-accent-text);
-    box-shadow: inset 0 0 0 1px rgb(var(--jw-accent-ch) / .4);
+    box-shadow: inset 0 0 0 1px rgb(var(--jw-accent-ch) / .45);
 }
 
-/* Menüs, Dialoge, Popups (MUI) */
+/* Menüs und Dialoge (MUI) */
 .MuiMenu-paper,
 .MuiPopover-paper {
-    background: rgb(var(--jw-surface-ch) / .9) !important;
-    backdrop-filter: blur(20px) saturate(1.3);
-    -webkit-backdrop-filter: blur(20px) saturate(1.3);
+    background: var(--jw-surface) !important;
     border: 1px solid var(--jw-line);
-    border-radius: var(--jw-r) !important;
-    box-shadow: 0 24px 48px -12px rgb(0 0 0 / .6) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 16px 36px -12px rgb(0 0 0 / .55) !important;
 }
 
 .MuiMenuItem-root {
@@ -668,16 +621,16 @@ header.MuiAppBar-root .MuiButton-contained.MuiButton-colorPrimary {
     background: var(--jw-accent);
     color: var(--jw-on-accent);
     box-shadow: none;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .MuiButton-contained.MuiButton-colorPrimary:hover {
     background: var(--jw-accent-hi);
-    box-shadow: 0 8px 22px -8px rgb(var(--jw-accent-ch) / .8);
+    box-shadow: none;
 }
 
 .MuiButtonGroup-contained {
-    border-radius: var(--jw-r-pill) !important;
+    border-radius: var(--jw-r) !important;
     overflow: hidden;
     box-shadow: none !important;
 }
@@ -689,7 +642,6 @@ header.MuiAppBar-root .MuiButton-contained.MuiButton-colorPrimary {
 .MuiTooltip-tooltip {
     background: var(--jw-surface-3) !important;
     color: var(--jw-text) !important;
-    border: 1px solid var(--jw-line);
     border-radius: var(--jw-r-sm) !important;
 }
 
@@ -699,37 +651,21 @@ header.MuiAppBar-root .MuiButton-contained.MuiButton-colorPrimary {
 .homeSectionsContainer .sectionTitle,
 .detailVerticalSection .sectionTitle,
 .verticalSection > .sectionTitle {
-    font-weight: 700;
+    font-weight: 600;
     color: var(--jw-text);
 }
 
 .homeSectionsContainer .sectionTitle-cards,
 .detailVerticalSection .sectionTitle-cards {
-    display: inline-flex;
-    align-items: center;
-    gap: .55em;
-    font-size: 1.32em;
-}
-
-.homeSectionsContainer .sectionTitle-cards::before,
-.detailVerticalSection .sectionTitle-cards::before {
-    content: "";
-    width: 4px;
-    height: 1.05em;
-    border-radius: 4px;
-    background: var(--jw-accent);
-    box-shadow: 0 0 12px rgb(var(--jw-accent-ch) / .6);
-    flex: none;
+    font-size: 1.25em;
 }
 
 .sectionTitleTextButton .chevron_right {
     color: var(--jw-text-3);
-    transition: transform .2s, color .2s;
 }
 
 .sectionTitleTextButton:hover .chevron_right {
-    color: var(--jw-accent-text);
-    transform: translateX(3px);
+    color: var(--jw-text);
 }
 
 .cardText {
@@ -740,7 +676,7 @@ header.MuiAppBar-root .MuiButton-contained.MuiButton-colorPrimary {
 
 .cardText-first {
     color: var(--jw-text);
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .cardText-secondary {
@@ -763,26 +699,25 @@ header.MuiAppBar-root .MuiButton-contained.MuiButton-colorPrimary {
 }
 
 .cardScalable {
-    transition: transform .28s var(--jw-ease), box-shadow .28s var(--jw-ease);
+    transition: transform .2s ease, box-shadow .2s ease;
     border-radius: var(--jw-r);
 }
 
 @media (hover: hover) and (pointer: fine) {
     .card-hoverable:hover .cardScalable {
-        transform: translateY(-3px);
-        box-shadow: 0 0 0 2px var(--jw-accent), 0 10px 22px -10px rgb(var(--jw-accent-ch) / .75);
+        transform: translateY(-2px);
+        box-shadow: 0 0 0 2px var(--jw-accent);
     }
 }
 
 .cardOverlayContainer {
-    background: linear-gradient(to top, rgb(var(--jw-shade-ch) / .85) 0%, rgb(var(--jw-shade-ch) / .25) 55%, rgb(var(--jw-shade-ch) / .05) 100%);
+    background: linear-gradient(to top, rgb(var(--jw-shade-ch) / .8) 0%, rgb(var(--jw-shade-ch) / .2) 60%, rgb(var(--jw-shade-ch) / 0) 100%);
     border-radius: var(--jw-r);
 }
 
 .cardOverlayContainer > .cardOverlayFab-primary {
     background: var(--jw-accent) !important;
     color: var(--jw-on-accent);
-    box-shadow: 0 8px 24px -6px rgb(var(--jw-accent-ch) / .85);
 }
 
 .cardOverlayButton-br .cardOverlayButton {
@@ -800,12 +735,11 @@ header.MuiAppBar-root .MuiButton-contained.MuiButton-colorPrimary {
 .fullSyncIndicator {
     background: var(--jw-accent) !important;
     color: var(--jw-on-accent) !important;
-    box-shadow: 0 4px 12px -4px rgb(0 0 0 / .6);
 }
 
 .itemProgressBar {
     background: rgb(255 255 255 / .18);
-    border-radius: 4px;
+    border-radius: 3px;
     overflow: hidden;
 }
 
@@ -814,17 +748,16 @@ header.MuiAppBar-root .MuiButton-contained.MuiButton-colorPrimary {
 }
 
 .emby-scrollbuttons-button {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background: rgb(var(--jw-text-ch) / .06);
-    border: 1px solid var(--jw-line);
     margin-left: 6px;
 }
 
 .emby-scrollbuttons-button:hover:not(:disabled) {
-    background: var(--jw-accent) !important;
-    color: var(--jw-on-accent) !important;
+    background: rgb(var(--jw-text-ch) / .14) !important;
+    color: var(--jw-text) !important;
 }
 
 /* Runde Bilder für Schauspieler */
@@ -860,7 +793,7 @@ header.MuiAppBar-root .MuiButton-contained.MuiButton-colorPrimary {
 .defaultCardBackground4,
 .defaultCardBackground5 {
     background-color: var(--jw-surface-3) !important;
-    background-image: linear-gradient(140deg, rgb(var(--jw-text-ch) / .04), rgb(var(--jw-accent-ch) / .22)) !important;
+    background-image: none !important;
 }
 
 .defaultCardBackground .cardImageIcon {
@@ -868,7 +801,9 @@ header.MuiAppBar-root .MuiButton-contained.MuiButton-colorPrimary {
 }
 
 /* =========================================================================
-   6. SLIDESHOW – "Kürzlich hinzugefügt in <Filme>" wird zum Hero oben
+   6. SLIDESHOW – "Kürzlich hinzugefügt in <Filme>" wird oben zum grossen Banner
+      6 Filme aus den bis zu 16 neuesten. Browser mit CSS random() (Chrome,
+      Edge, Safari) wählen bei jedem Laden zufällig, andere zeigen die neuesten 6.
    ========================================================================= */
 .homeSectionsContainer {
     display: flex;
@@ -879,67 +814,27 @@ html:not(.layout-tv) .homeSectionsContainer > div:has(> .verticalSection > .sect
     display: contents;
 }
 
-/* Der Hero (nur die erste Filme-Reihe) */
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) {
     order: -1;
     position: relative;
-    margin: 6px var(--jw-gutter) 2.2em;
-    padding: 0;
-    --jw-pad-x: clamp(22px, 4.2vw, 68px);
-    --jw-pad-y: clamp(22px, 3.6vw, 52px);
-    --jw-poster-w: clamp(150px, 17vw, 270px);
+    margin-bottom: 2.2em;
+    --jw-pad-x: clamp(22px, 4vw, 60px);
+    --jw-pad-y: clamp(22px, 3.4vw, 48px);
+    --jw-poster-w: clamp(150px, 16vw, 250px);
 }
 
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) > .emby-scrollbuttons {
     display: none !important;
 }
 
-/* Titel der Reihe als kleine Pille oben links im Hero */
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) > .sectionTitleContainer {
-    position: absolute;
-    z-index: 8;
-    top: calc(var(--jw-pad-y) * .55);
-    left: var(--jw-pad-x);
-    padding: 0 !important;
-    margin: 0;
-}
-
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) > .sectionTitleContainer .sectionTitleTextButton {
-    padding: 7px 10px 7px 14px !important;
-    border-radius: var(--jw-r-pill);
-    background: rgb(0 0 0 / .35);
-    border: 1px solid rgb(255 255 255 / .14);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    color: #fff;
-}
-
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) > .sectionTitleContainer .sectionTitle {
-    font-size: .82rem;
-    font-weight: 600;
-    letter-spacing: .04em;
-    color: #fff;
-    margin: 0;
-}
-
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) > .sectionTitleContainer .sectionTitle::before {
-    display: none;
-}
-
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) > .sectionTitleContainer .chevron_right {
-    color: #fff;
-    font-size: 1.2rem;
-}
-
-/* Rahmen */
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) > .emby-scroller {
     position: relative;
     overflow: hidden !important;
     padding: 0 !important;
-    margin: 0 !important;
+    margin: 0 var(--jw-gutter) !important;
     border-radius: var(--jw-r-lg);
-    background: rgb(var(--jw-shade-ch));
-    box-shadow: 0 30px 60px -30px rgb(0 0 0 / .8), 0 0 0 1px rgb(255 255 255 / .06);
+    background: var(--jw-surface);
+    border: 1px solid var(--jw-line);
     -webkit-mask-image: none;
     mask-image: none;
 }
@@ -952,19 +847,29 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     transition: none !important;
     white-space: normal !important;
     --jw-n: 1;
+    --jw-k: 1;
+    --jw-a: 1;
     --jw-slide: none;
     --jw-bar: none;
 }
 
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(2)) { --jw-n: 2; --jw-slide: jw-slide-2; --jw-bar: jw-bar-2; }
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(3)) { --jw-n: 3; --jw-slide: jw-slide-3; --jw-bar: jw-bar-3; }
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(4)) { --jw-n: 4; --jw-slide: jw-slide-4; --jw-bar: jw-bar-4; }
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(5)) { --jw-n: 5; --jw-slide: jw-slide-5; --jw-bar: jw-bar-5; }
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(6)) { --jw-n: 6; --jw-slide: jw-slide-6; --jw-bar: jw-bar-6; }
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(7)) { --jw-n: 7; --jw-slide: jw-slide-7; --jw-bar: jw-bar-7; }
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(8)) { --jw-n: 8; --jw-slide: jw-slide-8; --jw-bar: jw-bar-8; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(2)) { --jw-n: 2; --jw-k: 2; --jw-a: 1; --jw-slide: jw-slide-2; --jw-bar: jw-bar-2; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(3)) { --jw-n: 3; --jw-k: 3; --jw-a: 2; --jw-slide: jw-slide-3; --jw-bar: jw-bar-3; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(4)) { --jw-n: 4; --jw-k: 4; --jw-a: 3; --jw-slide: jw-slide-4; --jw-bar: jw-bar-4; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(5)) { --jw-n: 5; --jw-k: 5; --jw-a: 2; --jw-slide: jw-slide-5; --jw-bar: jw-bar-5; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(6)) { --jw-n: 6; --jw-k: 6; --jw-a: 5; --jw-slide: jw-slide-6; --jw-bar: jw-bar-6; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(7)) { --jw-n: 7; --jw-k: 6; --jw-a: 3; --jw-slide: jw-slide-6; --jw-bar: jw-bar-6; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(8)) { --jw-n: 8; --jw-k: 6; --jw-a: 3; --jw-slide: jw-slide-6; --jw-bar: jw-bar-6; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(9)) { --jw-n: 9; --jw-k: 6; --jw-a: 2; --jw-slide: jw-slide-6; --jw-bar: jw-bar-6; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(10)) { --jw-n: 10; --jw-k: 6; --jw-a: 3; --jw-slide: jw-slide-6; --jw-bar: jw-bar-6; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(11)) { --jw-n: 11; --jw-k: 6; --jw-a: 3; --jw-slide: jw-slide-6; --jw-bar: jw-bar-6; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(12)) { --jw-n: 12; --jw-k: 6; --jw-a: 5; --jw-slide: jw-slide-6; --jw-bar: jw-bar-6; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(13)) { --jw-n: 13; --jw-k: 6; --jw-a: 5; --jw-slide: jw-slide-6; --jw-bar: jw-bar-6; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(14)) { --jw-n: 14; --jw-k: 6; --jw-a: 3; --jw-slide: jw-slide-6; --jw-bar: jw-bar-6; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(15)) { --jw-n: 15; --jw-k: 6; --jw-a: 2; --jw-slide: jw-slide-6; --jw-bar: jw-bar-6; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:has(> .card:nth-child(16)) { --jw-n: 16; --jw-k: 6; --jw-a: 5; --jw-slide: jw-slide-6; --jw-bar: jw-bar-6; }
 
-/* Jede Karte = eine Folie, alle übereinander */
+/* Jede Karte ist eine Folie, alle liegen übereinander */
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card {
     position: absolute !important;
     inset: 0;
@@ -975,10 +880,8 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     contain: none !important;
     pointer-events: none;
     --jw-i: 1;
-}
-
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card:nth-child(n+9) {
-    display: none !important;
+    --jw-p: calc(var(--jw-i) - 1);
+    --jw-off: clamp(0, var(--jw-p) - var(--jw-k) + 1, 1);
 }
 
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card:nth-child(2) { --jw-i: 2; }
@@ -988,6 +891,18 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card:nth-child(6) { --jw-i: 6; }
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card:nth-child(7) { --jw-i: 7; }
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card:nth-child(8) { --jw-i: 8; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card:nth-child(9) { --jw-i: 9; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card:nth-child(10) { --jw-i: 10; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card:nth-child(11) { --jw-i: 11; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card:nth-child(12) { --jw-i: 12; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card:nth-child(13) { --jw-i: 13; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card:nth-child(14) { --jw-i: 14; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card:nth-child(15) { --jw-i: 15; }
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card:nth-child(16) { --jw-i: 16; }
+
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card:nth-child(n+17) {
+    display: none !important;
+}
 
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card > .cardBox {
     position: absolute;
@@ -996,13 +911,12 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     contain: none !important;
     isolation: isolate;
     overflow: hidden;
-    border-radius: var(--jw-r-lg);
     pointer-events: auto;
     visibility: hidden;
     opacity: 0;
     animation-name: var(--jw-slide);
-    animation-duration: calc(var(--jw-n) * var(--jw-hero-interval));
-    animation-delay: calc((var(--jw-i) - 1.12 - var(--jw-n)) * var(--jw-hero-interval));
+    animation-duration: calc(var(--jw-k) * var(--jw-hero-interval));
+    animation-delay: calc((var(--jw-p) - .12 - var(--jw-k)) * var(--jw-hero-interval) + var(--jw-off) * 100000s);
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
 }
@@ -1027,6 +941,48 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     display: none !important;
 }
 
+/* Hintergrund: ruhige Farbfläche, leicht in den Farben des Posters getönt */
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .blurhash-canvas {
+    opacity: .4 !important;
+    border-radius: 0;
+}
+
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardScalable::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgb(var(--jw-shade-ch) / .94) 0%, rgb(var(--jw-shade-ch) / .84) 38%, rgb(var(--jw-shade-ch) / .55) 70%, rgb(var(--jw-shade-ch) / .65) 100%);
+}
+
+/* Das Bild-Element füllt die Folie (klickbar), das Poster zeigt es über ::after */
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardImageContainer {
+    position: absolute !important;
+    inset: 0;
+    width: auto !important;
+    height: auto !important;
+    contain: none !important;
+    border-radius: 0 !important;
+    background-size: 0 0 !important;
+}
+
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardImageContainer::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    right: var(--jw-pad-x);
+    top: var(--jw-pad-y);
+    bottom: calc(var(--jw-pad-y) + 40px);
+    max-width: var(--jw-poster-w);
+    aspect-ratio: 2 / 3;
+    background: inherit;
+    background-size: cover;
+    background-position: center;
+    border-radius: var(--jw-r);
+    box-shadow: 0 18px 40px -14px rgb(0 0 0 / .75), 0 0 0 1px rgb(255 255 255 / .08);
+}
+
 /* Fortschritt bei angefangenen Filmen: dünne Linie ganz unten */
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .innerCardFooter {
     position: absolute !important;
@@ -1041,7 +997,7 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 }
 
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .innerCardFooter .itemProgressBar {
-    height: 4px;
+    height: 3px;
     border-radius: 0;
     background: rgb(255 255 255 / .15);
 }
@@ -1050,65 +1006,7 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     background: var(--jw-hero-accent) !important;
 }
 
-/* Unschärfe-Vorschau (Blurhash) als Grundfläche */
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .blurhash-canvas {
-    opacity: 1 !important;
-    border-radius: 0;
-}
-
-/* Das Bild-Element füllt die ganze Folie (klickbar), zeigt sein Bild aber nur über ::before / ::after */
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardImageContainer {
-    position: absolute !important;
-    inset: 0;
-    width: auto !important;
-    height: auto !important;
-    contain: none !important;
-    border-radius: 0 !important;
-    background-size: 0 0 !important;
-}
-
-/* Hintergrund: das Poster, gross und weichgezeichnet */
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardImageContainer::before {
-    content: "";
-    position: absolute;
-    inset: -70px;
-    background: inherit;
-    background-size: cover;
-    background-position: center 30%;
-    filter: blur(36px) saturate(1.5);
-}
-
-/* Scharfes Poster rechts */
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardImageContainer::after {
-    content: "";
-    position: absolute;
-    z-index: 2;
-    right: var(--jw-pad-x);
-    top: var(--jw-pad-y);
-    bottom: calc(var(--jw-pad-y) + 44px);
-    max-width: var(--jw-poster-w);
-    aspect-ratio: 2 / 3;
-    background: inherit;
-    background-size: cover;
-    background-position: center;
-    border-radius: var(--jw-r);
-    box-shadow: 0 34px 60px -18px rgb(0 0 0 / .85), 0 0 0 1px rgb(255 255 255 / .12), 0 0 60px -10px rgb(var(--jw-hero-accent-ch) / .45);
-}
-
-/* Weichzeichner + Verlauf für gute Lesbarkeit */
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardScalable::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    background:
-        radial-gradient(55% 75% at 84% 50%, rgb(var(--jw-hero-accent-ch) / .22), transparent 70%),
-        linear-gradient(90deg, rgb(var(--jw-shade-ch) / .94) 0%, rgb(var(--jw-shade-ch) / .78) 34%, rgb(var(--jw-shade-ch) / .30) 68%, rgb(var(--jw-shade-ch) / .42) 100%),
-        linear-gradient(0deg, rgb(var(--jw-shade-ch) / .7) 0%, transparent 42%);
-}
-
-/* Knopf-Leiste (Desktop) */
+/* Knöpfe */
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayContainer {
     z-index: 3;
     opacity: 1 !important;
@@ -1120,7 +1018,28 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     background: none !important;
 }
 
-/* Abspiel-Knopf (Handy/Touch: einzelner Knopf ohne Leiste) */
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayContainer > .cardOverlayFab-primary,
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardScalable > .cardOverlayButton {
+    margin: 0 !important;
+    width: auto !important;
+    height: 46px !important;
+    padding: 0 22px 0 16px !important;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 8px;
+    opacity: 1 !important;
+    border-radius: var(--jw-r) !important;
+    font-size: 1rem !important;
+    background: var(--jw-hero-accent) !important;
+    color: var(--jw-hero-on-accent) !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayContainer > .cardOverlayFab-primary {
+    position: static !important;
+}
+
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardScalable > .cardOverlayButton {
     position: absolute !important;
     z-index: 3;
@@ -1128,68 +1047,27 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     right: auto !important;
     bottom: var(--jw-pad-y) !important;
     top: auto !important;
-    margin: 0 !important;
-    height: 50px;
-    padding: 0 26px 0 18px !important;
-    display: inline-flex !important;
-    align-items: center;
-    gap: 8px;
-    opacity: 1 !important;
-    border-radius: var(--jw-r-pill);
-    background: var(--jw-hero-accent) !important;
-    color: var(--jw-hero-on-accent) !important;
-    box-shadow: 0 12px 30px -10px rgb(var(--jw-hero-accent-ch) / .9);
 }
 
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayContainer > .cardOverlayFab-primary:hover,
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardScalable > .cardOverlayButton:hover {
+    filter: brightness(1.12);
+}
+
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayContainer > .cardOverlayFab-primary .cardOverlayButtonIcon,
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardScalable > .cardOverlayButton .cardOverlayButtonIcon {
-    font-size: 30px;
+    font-size: 26px;
     color: inherit;
     background: none !important;
     padding: 0;
 }
 
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayContainer > .cardOverlayFab-primary::after,
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardScalable > .cardOverlayButton::after {
     content: var(--jw-hero-play);
-    font: 700 1rem/1 var(--jw-font-display);
+    font: 600 1rem/1 var(--jw-font-display);
 }
 
-/* "Abspielen"-Knopf */
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayContainer > .cardOverlayFab-primary {
-    position: static !important;
-    margin: 0 !important;
-    width: auto !important;
-    height: 50px !important;
-    padding: 0 26px 0 18px !important;
-    display: inline-flex !important;
-    align-items: center;
-    gap: 8px;
-    opacity: 1 !important;
-    border-radius: var(--jw-r-pill);
-    font-size: 1rem !important;
-    background: var(--jw-hero-accent) !important;
-    color: var(--jw-hero-on-accent) !important;
-    box-shadow: 0 12px 30px -10px rgb(var(--jw-hero-accent-ch) / .9);
-    transform: none !important;
-    transition: transform .2s var(--jw-ease), box-shadow .2s;
-}
-
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayContainer > .cardOverlayFab-primary:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 16px 36px -10px rgb(var(--jw-hero-accent-ch) / 1);
-}
-
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayContainer > .cardOverlayFab-primary .cardOverlayButtonIcon {
-    font-size: 30px;
-    color: inherit;
-}
-
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayContainer > .cardOverlayFab-primary::after {
-    content: var(--jw-hero-play);
-    font: 700 1rem/1 var(--jw-font-display);
-    letter-spacing: .01em;
-}
-
-/* Gesehen / Favorit / Mehr als runde Glas-Knöpfe */
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayButton-br {
     position: static !important;
     display: flex !important;
@@ -1198,27 +1076,24 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayButton-br .cardOverlayButton {
     opacity: 1 !important;
-    width: 50px;
-    height: 50px;
+    width: 46px;
+    height: 46px;
     padding: 0 !important;
     margin: 0 !important;
     border-radius: 50%;
     color: #fff;
     background: rgb(255 255 255 / .12) !important;
-    border: 1px solid rgb(255 255 255 / .18);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
 }
 
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayButton-br .cardOverlayButton:hover {
-    background: rgb(255 255 255 / .24) !important;
+    background: rgb(255 255 255 / .22) !important;
 }
 
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayButton-br .cardOverlayButtonIcon {
     font-size: 22px;
 }
 
-/* Titel, Label und Jahr */
+/* Titel und Jahr */
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardText {
     position: absolute;
     z-index: 3;
@@ -1233,11 +1108,10 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 }
 
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardText-first {
-    bottom: calc(var(--jw-pad-y) + 50px + 54px);
+    bottom: calc(var(--jw-pad-y) + 46px + 50px);
     color: #fff;
-    font: 800 clamp(2.1rem, 4.6vw, 4.2rem)/1.02 var(--jw-font-display);
-    letter-spacing: -.02em;
-    text-shadow: 0 4px 30px rgb(0 0 0 / .5);
+    font: 700 clamp(1.9rem, 3.6vw, 3.1rem)/1.1 var(--jw-font-display);
+    letter-spacing: -.01em;
 }
 
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardText-first a {
@@ -1249,43 +1123,28 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     overflow: hidden;
 }
 
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardText-first::before {
-    content: var(--jw-hero-label);
-    display: block;
-    width: fit-content;
-    margin-bottom: 16px;
-    padding: 7px 12px 6px;
-    border-radius: var(--jw-r-pill);
-    background: rgb(var(--jw-hero-accent-ch) / .2);
-    border: 1px solid rgb(var(--jw-hero-accent-ch) / .55);
-    color: #fff;
-    font: 700 .72rem/1 var(--jw-font-display);
-    letter-spacing: .2em;
-    text-shadow: none;
-}
-
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardText-secondary {
-    bottom: calc(var(--jw-pad-y) + 50px + 20px);
-    color: rgb(255 255 255 / .78) !important;
-    font: 600 1.02rem/1.2 var(--jw-font-display);
-    letter-spacing: .04em;
+    bottom: calc(var(--jw-pad-y) + 46px + 20px);
+    color: rgb(255 255 255 / .72) !important;
+    font: 500 1rem/1.2 var(--jw-font-display);
 }
 
-/* Fortschritts-Balken unten rechts */
+/* Fortschritts-Striche unten rechts */
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card::after {
     content: "";
     position: absolute;
     z-index: 6;
     visibility: visible;
-    bottom: calc(var(--jw-pad-y) + 23px);
-    right: calc(var(--jw-pad-x) + (var(--jw-n) - var(--jw-i)) * 32px);
-    width: 24px;
-    height: 4px;
-    border-radius: 4px;
-    background: linear-gradient(var(--jw-hero-accent), var(--jw-hero-accent)) 0 0 / 0% 100% no-repeat, rgb(255 255 255 / .28);
+    bottom: calc(var(--jw-pad-y) + 21px);
+    right: calc(var(--jw-pad-x) + (var(--jw-k) - 1 - var(--jw-p)) * 30px);
+    width: 22px;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(var(--jw-hero-accent), var(--jw-hero-accent)) 0 0 / 0% 100% no-repeat, rgb(255 255 255 / .25);
+    opacity: calc(1 - var(--jw-off));
     animation-name: var(--jw-bar);
-    animation-duration: calc(var(--jw-n) * var(--jw-hero-interval));
-    animation-delay: calc((var(--jw-i) - 1.12 - var(--jw-n)) * var(--jw-hero-interval));
+    animation-duration: calc(var(--jw-k) * var(--jw-hero-interval));
+    animation-delay: calc((var(--jw-p) - .12 - var(--jw-k)) * var(--jw-hero-interval) + var(--jw-off) * 100000s);
     animation-iteration-count: infinite;
     animation-timing-function: linear;
 }
@@ -1303,10 +1162,9 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 /* Handy / schmale Fenster */
 @media (max-width: 899.95px) {
     html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) {
-        --jw-poster-w: min(40vw, 200px);
+        --jw-poster-w: min(40vw, 190px);
         --jw-pad-x: 20px;
         --jw-pad-y: 22px;
-        margin-top: 4px;
     }
 
     html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer {
@@ -1315,20 +1173,23 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 
     html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardImageContainer::after {
         right: 50%;
-        top: 62px;
+        top: 24px;
         bottom: auto;
-        height: 40%;
+        height: 42%;
         transform: translateX(50%);
+    }
+
+    html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardScalable::after {
+        background: linear-gradient(0deg, rgb(var(--jw-shade-ch) / .95) 0%, rgb(var(--jw-shade-ch) / .84) 34%, rgb(var(--jw-shade-ch) / .55) 64%, rgb(var(--jw-shade-ch) / .62) 100%);
     }
 
     html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayContainer {
         justify-content: center;
     }
 
-    html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardScalable::after {
-        background:
-            radial-gradient(70% 45% at 50% 30%, rgb(var(--jw-hero-accent-ch) / .25), transparent 70%),
-            linear-gradient(0deg, rgb(var(--jw-shade-ch) / .95) 0%, rgb(var(--jw-shade-ch) / .8) 32%, rgb(var(--jw-shade-ch) / .35) 62%, rgb(var(--jw-shade-ch) / .5) 100%);
+    html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardScalable > .cardOverlayButton {
+        left: 50% !important;
+        transform: translateX(-50%) !important;
     }
 
     html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardText {
@@ -1337,48 +1198,21 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     }
 
     html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardText-first {
-        font-size: clamp(1.6rem, 7.4vw, 2.3rem);
-        bottom: calc(var(--jw-pad-y) + 50px + 62px);
-    }
-
-    html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardText-first::before {
-        margin: 0 auto 10px;
-        font-size: .62rem;
+        font-size: clamp(1.5rem, 7vw, 2.1rem);
+        bottom: calc(var(--jw-pad-y) + 46px + 58px);
     }
 
     html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardText-secondary {
-        bottom: calc(var(--jw-pad-y) + 50px + 32px);
+        bottom: calc(var(--jw-pad-y) + 46px + 26px);
     }
 
     html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card::after {
         bottom: calc(var(--jw-pad-y) * .5);
-        right: calc(50% - var(--jw-n) * 16px + (var(--jw-n) - var(--jw-i)) * 32px + 4px);
-    }
-
-    html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) > .sectionTitleContainer {
-        top: 16px;
-        left: 50%;
-        transform: translateX(-50%);
-        white-space: nowrap;
-    }
-
-    html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayContainer > .cardOverlayFab-primary,
-    html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardScalable > .cardOverlayButton {
-        height: 46px !important;
-    }
-
-    html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardScalable > .cardOverlayButton {
-        left: 50% !important;
-        transform: translateX(-50%);
-    }
-
-    html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayButton-br .cardOverlayButton {
-        width: 46px;
-        height: 46px;
+        right: calc(50% - var(--jw-k) * 15px + (var(--jw-k) - 1 - var(--jw-p)) * 30px + 4px);
     }
 }
 
-/* Weniger Bewegung gewünscht: nur das neueste Element, keine Animation */
+/* Weniger Bewegung gewünscht: nur der neueste Film, keine Animation */
 @media (prefers-reduced-motion: reduce) {
     html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card > .cardBox,
     html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card::after {
@@ -1390,9 +1224,38 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     }
 }
 
+/* Zufällige Auswahl (Browser mit CSS random(): Chrome, Edge, Safari) */
+@property --jw-seed {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    @supports (width: random(0px, 1px)) {
+        html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer {
+            --jw-seed: random(0, var(--jw-n));
+        }
+
+        html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card {
+            --jw-p: mod((var(--jw-i) - 1) * var(--jw-a) - round(down, var(--jw-seed), 1), var(--jw-n));
+        }
+
+        html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer > .card:first-child > .cardBox {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .itemsContainer:not(:has(> .card:nth-child(2))) > .card > .cardBox {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}
+
 @keyframes jw-slide-2 {
-    0% { opacity: 0; visibility: visible; transform: scale(1.03); }
-    6% { opacity: 1; transform: scale(1); }
+    0% { opacity: 0; visibility: visible; }
+    6% { opacity: 1; }
     50% { opacity: 1; visibility: visible; }
     56%, 100% { opacity: 0; visibility: hidden; }
 }
@@ -1402,8 +1265,8 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     50.01%, 100% { background-size: 0% 100%; }
 }
 @keyframes jw-slide-3 {
-    0% { opacity: 0; visibility: visible; transform: scale(1.03); }
-    4% { opacity: 1; transform: scale(1); }
+    0% { opacity: 0; visibility: visible; }
+    4% { opacity: 1; }
     33.333% { opacity: 1; visibility: visible; }
     37.333%, 100% { opacity: 0; visibility: hidden; }
 }
@@ -1413,8 +1276,8 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     33.343%, 100% { background-size: 0% 100%; }
 }
 @keyframes jw-slide-4 {
-    0% { opacity: 0; visibility: visible; transform: scale(1.03); }
-    3% { opacity: 1; transform: scale(1); }
+    0% { opacity: 0; visibility: visible; }
+    3% { opacity: 1; }
     25% { opacity: 1; visibility: visible; }
     28%, 100% { opacity: 0; visibility: hidden; }
 }
@@ -1424,8 +1287,8 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     25.01%, 100% { background-size: 0% 100%; }
 }
 @keyframes jw-slide-5 {
-    0% { opacity: 0; visibility: visible; transform: scale(1.03); }
-    2.4% { opacity: 1; transform: scale(1); }
+    0% { opacity: 0; visibility: visible; }
+    2.4% { opacity: 1; }
     20% { opacity: 1; visibility: visible; }
     22.4%, 100% { opacity: 0; visibility: hidden; }
 }
@@ -1435,8 +1298,8 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     20.01%, 100% { background-size: 0% 100%; }
 }
 @keyframes jw-slide-6 {
-    0% { opacity: 0; visibility: visible; transform: scale(1.03); }
-    2% { opacity: 1; transform: scale(1); }
+    0% { opacity: 0; visibility: visible; }
+    2% { opacity: 1; }
     16.667% { opacity: 1; visibility: visible; }
     18.667%, 100% { opacity: 0; visibility: hidden; }
 }
@@ -1444,28 +1307,6 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     0% { background-size: 0% 100%; }
     16.667% { background-size: 100% 100%; }
     16.677%, 100% { background-size: 0% 100%; }
-}
-@keyframes jw-slide-7 {
-    0% { opacity: 0; visibility: visible; transform: scale(1.03); }
-    1.714% { opacity: 1; transform: scale(1); }
-    14.286% { opacity: 1; visibility: visible; }
-    16%, 100% { opacity: 0; visibility: hidden; }
-}
-@keyframes jw-bar-7 {
-    0% { background-size: 0% 100%; }
-    14.286% { background-size: 100% 100%; }
-    14.296%, 100% { background-size: 0% 100%; }
-}
-@keyframes jw-slide-8 {
-    0% { opacity: 0; visibility: visible; transform: scale(1.03); }
-    1.5% { opacity: 1; transform: scale(1); }
-    12.5% { opacity: 1; visibility: visible; }
-    14%, 100% { opacity: 0; visibility: hidden; }
-}
-@keyframes jw-bar-8 {
-    0% { background-size: 0% 100%; }
-    12.5% { background-size: 100% 100%; }
-    12.51%, 100% { background-size: 0% 100%; }
 }
 
 /* =========================================================================
@@ -1482,7 +1323,7 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     pointer-events: none;
     background:
         linear-gradient(to bottom, rgb(var(--jw-bg-ch) / 0) 35%, rgb(var(--jw-bg-ch) / .65) 75%, rgb(var(--jw-bg-ch) / 1) 100%),
-        linear-gradient(to right, rgb(var(--jw-bg-ch) / .55), rgb(var(--jw-bg-ch) / 0) 55%);
+        linear-gradient(to right, rgb(var(--jw-bg-ch) / .5), rgb(var(--jw-bg-ch) / 0) 55%);
 }
 
 .detailRibbon {
@@ -1492,13 +1333,13 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 }
 
 .itemDetailPage .itemName {
-    font-weight: 800;
+    font-weight: 700;
     color: var(--jw-text);
 }
 
 .itemDetailPage .detailPagePrimaryContainer .itemName.infoText {
-    font-size: clamp(1.9rem, 3.4vw, 3rem);
-    line-height: 1.08;
+    font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+    line-height: 1.1;
 }
 
 .itemMiscInfo .mediaInfoItem {
@@ -1507,16 +1348,16 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 
 .mediaInfoOfficialRating,
 .mediaInfoText {
-    border-radius: 6px;
+    border-radius: 4px;
     border: 1px solid var(--jw-line-2) !important;
     background: transparent !important;
     color: var(--jw-text-2) !important;
-    padding: .1em .5em;
+    padding: .1em .45em;
 }
 
 .detailImageContainer .card .cardScalable {
     border-radius: var(--jw-r-lg);
-    box-shadow: 0 30px 60px -22px rgb(0 0 0 / .85), 0 0 0 1px var(--jw-line);
+    box-shadow: 0 24px 48px -24px rgb(0 0 0 / .8), 0 0 0 1px var(--jw-line);
 }
 
 .detailImageContainer .cardImageContainer,
@@ -1526,24 +1367,22 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 }
 
 .mainDetailButtons {
-    gap: 10px;
+    gap: 8px;
 }
 
 .mainDetailButtons .detailButton {
-    width: 48px;
-    height: 48px;
+    width: 46px;
+    height: 46px;
     margin: 0 !important;
     padding: 0 !important;
     border-radius: 50%;
     background: rgb(var(--jw-text-ch) / .08);
-    border: 1px solid var(--jw-line-2);
     color: var(--jw-text);
-    transition: background-color .2s, transform .2s var(--jw-ease), box-shadow .2s;
+    transition: background-color .15s;
 }
 
 .mainDetailButtons .detailButton:hover {
     background: rgb(var(--jw-text-ch) / .16);
-    transform: translateY(-2px);
 }
 
 .mainDetailButtons .detailButton-content {
@@ -1554,12 +1393,10 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 }
 
 .mainDetailButtons .btnPlay {
-    width: 58px;
-    height: 58px;
+    width: 54px;
+    height: 54px;
     background: var(--jw-accent);
-    border-color: transparent;
     color: var(--jw-on-accent);
-    box-shadow: 0 12px 30px -10px rgb(var(--jw-accent-ch) / .9);
 }
 
 .mainDetailButtons .btnPlay:hover {
@@ -1567,7 +1404,7 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 }
 
 .mainDetailButtons .btnPlay .detailButton-icon {
-    font-size: 2rem;
+    font-size: 1.9rem;
 }
 
 .detailButton-icon {
@@ -1592,48 +1429,27 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 }
 
 .itemDetailPage .tagline {
-    color: var(--jw-accent-text);
-    font-weight: 600;
+    color: var(--jw-text);
+    font-weight: 500;
 }
 
 .itemDetailPage .overview {
     color: var(--jw-text-2);
-    line-height: 1.65;
-}
-
-.itemDetailPage .detailsGroupItem {
-    align-items: center;
+    line-height: 1.6;
 }
 
 .itemDetailPage .detailsGroupItem .label {
     color: var(--jw-text-3);
-    text-transform: uppercase;
-    font-size: .72rem;
-    font-weight: 700;
-    letter-spacing: .12em;
-}
-
-.itemDetailPage .detailsGroupItem .focuscontainer-x > span {
-    font-size: 0;
 }
 
 .itemDetailPage .detailsGroupItem a.button-link,
 .itemDetailPage .itemGenres a {
-    font-size: .9rem;
     color: var(--jw-text);
-    border-radius: var(--jw-r-pill);
-    background: rgb(var(--jw-text-ch) / .07);
-    border: 1px solid var(--jw-line);
-    padding: .12em .65em;
-    margin: .1em .15em .1em 0;
-    display: inline-block;
     font-weight: 500;
-    text-decoration: none;
 }
 
 .itemDetailPage .detailsGroupItem a.button-link:hover,
 .itemDetailPage .itemGenres a:hover {
-    border-color: rgb(var(--jw-accent-ch) / .6);
     color: var(--jw-accent-text);
 }
 
@@ -1652,16 +1468,14 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 .button-submit,
 .button-cancel,
 .raised.cancel {
-    border-radius: var(--jw-r-pill) !important;
-    font-weight: 700;
-    letter-spacing: .01em;
-    transition: background-color .2s, box-shadow .2s, transform .2s var(--jw-ease);
+    border-radius: var(--jw-r) !important;
+    font-weight: 600;
+    transition: background-color .15s;
 }
 
 .raised:not(.button-submit):not(.button-delete) {
     background: rgb(var(--jw-text-ch) / .08);
     color: var(--jw-text);
-    border: 1px solid var(--jw-line);
 }
 
 .raised:not(.button-submit):not(.button-delete):hover {
@@ -1671,12 +1485,10 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 .button-submit {
     background: var(--jw-accent) !important;
     color: var(--jw-on-accent) !important;
-    box-shadow: 0 10px 26px -12px rgb(var(--jw-accent-ch) / .9);
 }
 
 .button-submit:hover {
     background: var(--jw-accent-hi) !important;
-    transform: translateY(-1px);
 }
 
 .emby-input,
@@ -1684,16 +1496,15 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 .emby-select-withcolor {
     border-radius: var(--jw-r-sm) !important;
     border: 1px solid var(--jw-line-2) !important;
-    background: rgb(var(--jw-text-ch) / .05) !important;
+    background: rgb(var(--jw-text-ch) / .04) !important;
     color: var(--jw-text);
-    transition: border-color .2s, box-shadow .2s;
+    transition: border-color .15s;
 }
 
 .emby-input:focus,
 .emby-textarea:focus,
 .emby-select-withcolor:focus {
     border-color: var(--jw-accent) !important;
-    box-shadow: 0 0 0 3px rgb(var(--jw-accent-ch) / .22);
 }
 
 .emby-select-withcolor > option {
@@ -1708,7 +1519,7 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 }
 
 .checkboxOutline {
-    border-radius: 6px;
+    border-radius: 4px;
 }
 
 .dialog,
@@ -1719,22 +1530,20 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 
 .dialog:not(.dialog-fullscreen) {
     border-radius: var(--jw-r-lg) !important;
-    box-shadow: 0 40px 80px -20px rgb(0 0 0 / .7);
+    box-shadow: 0 24px 60px -20px rgb(0 0 0 / .6);
 }
 
 .formDialogHeader:not(.formDialogHeader-clear),
 .formDialogFooter:not(.formDialogFooter-clear) {
-    background: rgb(var(--jw-surface-ch) / .85) !important;
+    background: var(--jw-surface) !important;
     border-color: var(--jw-line) !important;
     color: var(--jw-text) !important;
 }
 
 .actionSheet {
-    background: rgb(var(--jw-surface-ch) / .92) !important;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: var(--jw-surface) !important;
     border: 1px solid var(--jw-line);
-    border-radius: var(--jw-r) !important;
+    border-radius: 12px !important;
 }
 
 .actionSheetMenuItem {
@@ -1742,25 +1551,24 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 }
 
 .actionSheetMenuItem:hover {
-    background: rgb(var(--jw-text-ch) / .07) !important;
+    background: rgb(var(--jw-text-ch) / .06) !important;
 }
 
 .toast {
-    border-radius: var(--jw-r-pill) !important;
+    border-radius: var(--jw-r) !important;
     background: var(--jw-surface-3) !important;
     color: var(--jw-text) !important;
-    border: 1px solid var(--jw-line);
 }
 
 .paperList,
 .collapseContent {
-    background: rgb(var(--jw-surface-ch) / .8) !important;
+    background: var(--jw-surface) !important;
     border: 1px solid var(--jw-line);
     border-radius: var(--jw-r) !important;
 }
 
 .emby-tab-button {
-    border-radius: var(--jw-r-pill);
+    border-radius: var(--jw-r-sm);
 }
 
 .emby-tab-button-active {
@@ -1776,7 +1584,6 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 .infoBanner {
     background: var(--jw-surface-3) !important;
     color: var(--jw-text) !important;
-    border: 1px solid var(--jw-line);
     border-radius: var(--jw-r) !important;
 }
 
@@ -1792,33 +1599,29 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 #loginPage .visualLoginForm {
     box-sizing: border-box;
     width: 100%;
-    max-width: 506px;
+    max-width: 486px;
     margin-left: auto;
     margin-right: auto;
-    padding: 30px 32px 22px;
-    border-radius: 26px;
-    background: rgb(var(--jw-surface-ch) / .72);
+    padding: 28px 28px 20px;
+    border-radius: var(--jw-r-lg);
+    background: var(--jw-surface);
     border: 1px solid var(--jw-line);
-    box-shadow: 0 40px 90px -40px rgb(0 0 0 / .85), 0 0 0 1px rgb(var(--jw-accent-ch) / .06);
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
 }
 
 #loginPage .readOnlyContent {
     width: 100%;
-    max-width: 440px;
+    max-width: 430px;
 }
 
-/* Grosses Logo-Zeichen über dem Namen */
 #loginPage > .padded-left::before {
     content: "";
     order: -2;
     flex: none;
     align-self: center;
-    width: 84px;
-    height: 84px;
-    margin-bottom: 22px;
-    box-shadow: 0 0 46px 2px rgb(var(--jw-accent-ch) / .55), 0 0 8px 0 rgb(var(--jw-accent-ch) / .85);
+    width: 56px;
+    height: 56px;
+    margin-bottom: 18px;
+    box-shadow: inset 0 0 0 2px rgb(var(--jw-accent-ch) / .45);
 }
 
 #loginPage > .padded-left::after {
@@ -1826,31 +1629,16 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     order: -1;
     display: block;
     text-align: center;
-    margin: 0 auto 26px;
-    font: 900 clamp(2.2rem, 6vw, 3.6rem)/1 var(--jw-font-display);
-    letter-spacing: .2em;
-    padding-left: .2em;
-    background: linear-gradient(90deg, var(--jw-text) 0%, var(--jw-text) 40%, var(--jw-accent) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    filter: drop-shadow(0 6px 26px rgb(var(--jw-accent-ch) / .35));
-}
-
-#loginPage::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background:
-        radial-gradient(760px 440px at 50% 12%, rgb(var(--jw-accent-ch) / .20), transparent 70%),
-        radial-gradient(1000px 640px at 50% 118%, rgb(var(--jw-accent-ch) / .12), transparent 70%);
+    margin: 0 auto 28px;
+    padding-left: .16em;
+    font: 700 clamp(2rem, 5vw, 2.8rem)/1 var(--jw-font-display);
+    letter-spacing: .16em;
+    color: var(--jw-text);
 }
 
 #loginPage .sectionTitle {
-    font-size: 1.15rem;
-    font-weight: 600;
+    font-size: 1.1rem;
+    font-weight: 500;
     color: var(--jw-text-2);
 }
 
@@ -1862,7 +1650,7 @@ html:has(#loginPage:not(.hide)) header.MuiAppBar-root a[href="#/"] {
    10. PLAYER
    ========================================================================= */
 .videoOsdBottom {
-    background: linear-gradient(to top, rgb(0 0 0 / .88) 0%, rgb(0 0 0 / .55) 55%, transparent 100%) !important;
+    background: linear-gradient(to top, rgb(0 0 0 / .85) 0%, rgb(0 0 0 / .5) 55%, transparent 100%) !important;
 }
 
 .mdl-slider-background-lower {
@@ -1870,13 +1658,11 @@ html:has(#loginPage:not(.hide)) header.MuiAppBar-root a[href="#/"] {
 }
 
 .mdl-slider-background-flex {
-    border-radius: 4px;
-    height: .28em;
+    border-radius: 3px;
 }
 
 .mdl-slider::-webkit-slider-thumb {
     background: var(--jw-accent) !important;
-    box-shadow: 0 0 0 4px rgb(var(--jw-accent-ch) / .25), 0 0 14px rgb(var(--jw-accent-ch) / .8);
 }
 
 .mdl-slider::-moz-range-thumb {
@@ -1893,28 +1679,18 @@ html:has(#loginPage:not(.hide)) header.MuiAppBar-root a[href="#/"] {
     background: var(--jw-accent) !important;
     color: var(--jw-on-accent) !important;
     border-radius: 50%;
-    box-shadow: 0 10px 28px -8px rgb(var(--jw-accent-ch) / .9);
 }
 
 .skip-button,
 .skipIntro {
-    border-radius: var(--jw-r-pill) !important;
-    background: rgb(var(--jw-surface-ch) / .7) !important;
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    border-radius: var(--jw-r) !important;
+    background: rgb(var(--jw-surface-ch) / .9) !important;
     border: 1px solid var(--jw-line-2) !important;
 }
 
 /* =========================================================================
-   11. TV-LAYOUT: ruhiger, ohne teure Effekte
+   11. WENIGER BEWEGUNG
    ========================================================================= */
-.layout-tv header.MuiAppBar-root,
-.layout-tv .MuiMenu-paper,
-.layout-tv .actionSheet {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-}
-
 @media (prefers-reduced-motion: reduce) {
     .cardScalable,
     .mainDetailButtons .detailButton,

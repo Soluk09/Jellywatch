@@ -5,11 +5,10 @@ Es ist reines CSS, ohne JavaScript, lädt nichts aus dem Internet nach und sende
 
 ## Was das Theme macht und was nicht
 
-| | |
-|---|---|
-| ✅ Ändert nur Farben, Abstände, Formen und Animationen | ❌ Kein JavaScript, kein Plugin, kein Eingriff in Jellyfin-Dateien |
-| ✅ Alle Grafiken (Logo, Verläufe) sind direkt im CSS gezeichnet | ❌ Kein `@import`, kein `url()`, keine Schriften oder Bilder aus dem Internet |
-| ✅ Funktioniert komplett offline | ❌ Kein Tracking, keine Statistik, keine Verbindung zu GitHub oder CDNs |
+- Es ändert nur Farben, Abstände, Formen und Animationen.
+- Alle Grafiken (z.B. das Logo) sind direkt im CSS gezeichnet. Es gibt kein `@import`, kein `url()` und keine Schriften oder Bilder aus dem Internet.
+- Kein JavaScript, kein Plugin, kein Eingriff in Jellyfin-Dateien.
+- Kein Tracking und keine Verbindung zu GitHub oder anderen Servern. Es funktioniert komplett offline.
 
 Bei jedem Push prüft ein GitHub-Workflow (`tools/check.py`) automatisch, dass das so bleibt.
 Der Check schlägt fehl, wenn jemand (auch versehentlich) `@import`, `url()`, `data:`-Adressen,
