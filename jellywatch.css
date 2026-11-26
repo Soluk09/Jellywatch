@@ -1,5 +1,5 @@
 /*!
- * JELLYWATCH – Theme für Jellyfin 12 (Logo: SOLWATCH)
+ * JELLYWATCH – Theme für Jellyfin 12 (Logo: ECLIPSE)
  * https://github.com/Soluk09/Jellywatch
  *
  * Reines CSS. Keine externen Dateien, kein @import, keine Schriften oder Bilder
@@ -26,7 +26,7 @@
    1. EINSTELLUNGEN (können überschrieben werden)
    ========================================================================= */
 :where(:root) {
-    --jw-brand: "SOLWATCH";
+    --jw-brand: "ECLIPSE";
     --jw-hero-label: "NEU HINZUGEFÜGT";
     --jw-hero-play: "Abspielen";
     --jw-hero-interval: 7s;
@@ -289,6 +289,13 @@ html:not([data-theme]) {
     --jf-palette-Alert-infoFilledColor: var(--jw-text);
     --jf-card-borderRadius: var(--jw-r);
 
+    /* Logo-Zeichen: Sonnenfinsternis = Lichtpunkt ("Diamantring") + Mond + Sonne */
+    --jw-mark:
+        radial-gradient(13% 13% at 23% 75%, #fff 0%, rgb(255 255 255 / .85) 28%, rgb(255 255 255 / 0) 100%),
+        radial-gradient(45% 45% at 61% 39%, var(--jw-bg) 0 94%, rgb(var(--jw-bg-ch) / 0) 100%),
+        radial-gradient(50% 50% at 50% 50%, var(--jw-accent-hi) 0%, var(--jw-accent) 75%, var(--jw-accent) 93%, rgb(var(--jw-accent-ch) / 0) 100%);
+    --jw-corona: 0 0 14px 0 rgb(var(--jw-accent-ch) / .6), 0 0 3px 0 rgb(var(--jw-accent-ch) / .9);
+
     --jf-overlays-1: none;
     --jf-overlays-2: none;
     --jf-overlays-3: none;
@@ -450,7 +457,7 @@ header.MuiAppBar-root .MuiAvatar-root {
     box-shadow: 0 0 0 2px rgb(var(--jw-bg-ch) / 1), 0 0 0 4px rgb(var(--jw-accent-ch) / .85);
 }
 
-/* Logo: Server-Name ausblenden, SOLWATCH anzeigen */
+/* Logo: Server-Name ausblenden, Sonnenfinsternis-Zeichen + Name anzeigen */
 header.MuiAppBar-root a.MuiButton-root[href="#/"] {
     font-size: 0 !important;
     line-height: 1;
@@ -465,13 +472,19 @@ header.MuiAppBar-root a.MuiButton-root[href="#/"]:hover {
     background: rgb(var(--jw-text-ch) / .05);
 }
 
-header.MuiAppBar-root a.MuiButton-root[href="#/"] .MuiButton-startIcon {
-    width: 26px;
-    height: 26px;
-    margin: 0 11px 0 0;
+header.MuiAppBar-root a.MuiButton-root[href="#/"] .MuiButton-startIcon,
+.MuiDrawer-paper a[href="#/"] .MuiListItemIcon-root,
+.skinHeader .pageTitleWithDefaultLogo::before,
+#loginPage > .padded-left::before {
     border-radius: 50%;
-    background: radial-gradient(closest-side, var(--jw-bg) 0 56%, var(--jw-accent) 61% 80%, transparent 85%);
-    box-shadow: 0 0 16px 1px rgb(var(--jw-accent-ch) / .6);
+    background: var(--jw-mark);
+    box-shadow: var(--jw-corona);
+}
+
+header.MuiAppBar-root a.MuiButton-root[href="#/"] .MuiButton-startIcon {
+    width: 28px;
+    height: 28px;
+    margin: 0 12px 0 0;
 }
 
 header.MuiAppBar-root a.MuiButton-root[href="#/"] .MuiButton-startIcon img {
@@ -497,10 +510,22 @@ header.MuiAppBar-root a.MuiButton-root[href="#/"]::after,
         order: 2;
     }
 
+    header.MuiAppBar-root .MuiToolbar-root:not(:has(a[href="#/"]))::before {
+        content: "";
+        order: 1;
+        flex: none;
+        width: 24px;
+        height: 24px;
+        margin: 0 10px 0 6px;
+        border-radius: 50%;
+        background: var(--jw-mark);
+        box-shadow: var(--jw-corona);
+        pointer-events: none;
+    }
+
     header.MuiAppBar-root .MuiToolbar-root:not(:has(a[href="#/"]))::after {
         content: var(--jw-brand);
         order: 1;
-        margin-left: 4px;
         font: 800 1.12rem/1 var(--jw-font-display);
         letter-spacing: .16em;
         background: linear-gradient(90deg, var(--jw-text) 0%, var(--jw-text) 42%, var(--jw-accent-text) 100%);
@@ -520,8 +545,15 @@ header.MuiAppBar-root a.MuiButton-root[href="#/"]::after,
     border-right: 1px solid var(--jw-line) !important;
 }
 
-.MuiDrawer-paper a[href="#/"] img,
 .MuiDrawer-paper a[href="#/"] .MuiListItemIcon-root {
+    flex: none;
+    width: 34px;
+    height: 34px;
+    min-width: 0 !important;
+    margin-right: 16px;
+}
+
+.MuiDrawer-paper a[href="#/"] .MuiListItemIcon-root > * {
     display: none;
 }
 
@@ -568,6 +600,14 @@ header.MuiAppBar-root a.MuiButton-root[href="#/"]::after,
     width: auto !important;
     height: auto !important;
     min-height: 1.5em;
+}
+
+.skinHeader .pageTitleWithDefaultLogo::before {
+    content: "";
+    flex: none;
+    width: 26px;
+    height: 26px;
+    margin-right: 12px;
 }
 
 .mainDrawer {
@@ -1743,10 +1783,18 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 /* =========================================================================
    9. ANMELDESEITE
    ========================================================================= */
+#loginPage > .padded-left {
+    display: flex;
+    flex-direction: column;
+}
+
 #loginPage .manualLoginForm,
 #loginPage .visualLoginForm {
-    max-width: 440px;
-    margin: 0 auto;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 506px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 30px 32px 22px;
     border-radius: 26px;
     background: rgb(var(--jw-surface-ch) / .72);
@@ -1757,11 +1805,25 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 }
 
 #loginPage .readOnlyContent {
+    width: 100%;
     max-width: 440px;
 }
 
+/* Grosses Logo-Zeichen über dem Namen */
 #loginPage > .padded-left::before {
+    content: "";
+    order: -2;
+    flex: none;
+    align-self: center;
+    width: 84px;
+    height: 84px;
+    margin-bottom: 22px;
+    box-shadow: 0 0 46px 2px rgb(var(--jw-accent-ch) / .55), 0 0 8px 0 rgb(var(--jw-accent-ch) / .85);
+}
+
+#loginPage > .padded-left::after {
     content: var(--jw-brand);
+    order: -1;
     display: block;
     text-align: center;
     margin: 0 auto 26px;

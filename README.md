@@ -6,7 +6,7 @@
 
 Ein dunkles, modernes Theme für **Jellyfin 12**. Es ist **nur CSS**: ohne JavaScript, ohne Plugins und ohne Internet-Zugriffe.
 
-Logo „SOLWATCH“ · 6 Farbvarianten zum Auswählen · Slideshow mit den neuesten Filmen · „Anfragen“-Knopf für Seerr
+Logo „ECLIPSE“ · 6 Farbvarianten zum Auswählen · Slideshow mit den neuesten Filmen · „Anfragen“-Knopf für Seerr
 
 ![Startseite mit Jellywatch](screenshots/startseite.jpg)
 
@@ -35,7 +35,7 @@ Logo „SOLWATCH“ · 6 Farbvarianten zum Auswählen · Slideshow mit den neues
 |---|---|
 | 🎬 **Slideshow** | Die neuesten Filme laufen gross oben auf der Startseite durch, mit Poster, Titel und „Abspielen“-Knopf. |
 | 🎨 **6 Farbvarianten** | Rot/Schwarz, Schwarz/Weiss, Weiss/Schwarz (hell), Weiss/Rot (hell), Blau/Schwarz, Violett/Schwarz. Jeder Benutzer wählt selbst. |
-| 🔤 **Eigenes Logo** | Oben links steht **SOLWATCH** statt „Jellyfin“. Der Name lässt sich mit einer Zeile ändern. |
+| 🌑 **Eigenes Logo** | Oben links steht **ECLIPSE** mit einer Sonnenfinsternis als Zeichen, statt „Jellyfin“. Name und Zeichen sind reines CSS. Den Namen änderst du mit einer Zeile. |
 | ➕ **Seerr-Knopf** | Optional: ein „Anfragen“-Knopf direkt in der Kopfzeile, **ohne API-Key**. |
 | 🪟 **Glas-Effekt** | Durchscheinende Kopfzeile, Menüs und Dialoge, runde Karten und Knöpfe. |
 | 📱 **Handy** | Angepasst für schmale Bildschirme und die Jellyfin-App. |
