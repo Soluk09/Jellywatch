@@ -1,5 +1,5 @@
 /*!
- * JELLYWATCH – Theme für Jellyfin 12 (Logo: ECLIPSE)
+ * JELLYWATCH – Theme für Jellyfin 12
  * https://github.com/Soluk09/Jellywatch
  *
  * Reines CSS: kein JavaScript, kein @import, keine Dateien oder Schriften aus dem Internet.
@@ -9,23 +9,23 @@
  *   speichern und die Seite mit Strg+F5 neu laden.
  *
  * Farbe (jeder Benutzer selbst): Einstellungen → Anzeige → Theme
- *   Dark          → Blau / Schwarz (Standard)
- *   Blue Radiance → Rot / Schwarz
- *   WMC           → Schwarz / Weiss
- *   Light         → Weiss / Schwarz (hell)
- *   Apple TV      → Weiss / Blau (hell)
- *   Purple Haze   → Violett / Schwarz
+ *   Dark          → dunkel, blauer Akzent (Standard)
+ *   Light         → hell, blauer Akzent
+ *   Apple TV      → hell, silbergrau
+ *   Blue Radiance → dunkelblau
+ *   Purple Haze   → violett
+ *   WMC           → blau mit grünem Akzent (wie Windows Media Center)
  *
  * Eigene Werte unter dem Theme einfügen, z.B.:
- *   :root { --jw-brand: "MEINKINO"; --jw-hero-interval: 9s; }
+ *   :root { --jw-hero-interval: 9s; }
  */
 
 /* =========================================================================
    1. EINSTELLUNGEN
    ========================================================================= */
 :where(:root) {
-    --jw-brand: "ECLIPSE";
     --jw-hero-play: "Abspielen";
+    --jw-play-w: 156px;
     --jw-hero-interval: 7s;
     --jw-hero-height: clamp(340px, 56vh, 600px);
     --jw-hero-height-mobile: clamp(420px, 72vh, 600px);
@@ -45,7 +45,7 @@
    2. FARBVARIANTEN (Einstellungen → Anzeige → Theme)
    ========================================================================= */
 
-/* Blau / Schwarz – Standard ("Dark") */
+/* Dark (Standard): dunkel, blauer Akzent */
 :where(:root),
 :where(html[data-theme="dark"]) {
     --jw-scheme: dark;
@@ -56,110 +56,23 @@
     --jw-accent-text: #7eaaff;
     --jw-on-accent: #ffffff;
     --jw-on-accent-ch: 255 255 255;
-    --jw-hero-accent: #2f6fe6;
-    --jw-hero-accent-ch: 47 111 230;
-    --jw-hero-on-accent: #ffffff;
-    --jw-bg: #080b12;
-    --jw-bg-ch: 8 11 18;
-    --jw-surface: #10151f;
-    --jw-surface-ch: 16 21 31;
-    --jw-surface-2: #161c28;
-    --jw-surface-3: #1f2635;
-    --jw-text: #eef1f6;
-    --jw-text-ch: 238 241 246;
-    --jw-text-2: rgb(238 241 246 / .70);
-    --jw-text-3: rgb(238 241 246 / .48);
+    --jw-bg: #0b0c10;
+    --jw-bg-ch: 11 12 16;
+    --jw-surface: #14161b;
+    --jw-surface-ch: 20 22 27;
+    --jw-surface-2: #1b1e24;
+    --jw-surface-3: #252931;
+    --jw-text: #eef0f4;
+    --jw-text-ch: 238 240 244;
+    --jw-text-2: rgb(238 240 244 / .70);
+    --jw-text-3: rgb(238 240 244 / .48);
     --jw-line: rgb(255 255 255 / .08);
     --jw-line-2: rgb(255 255 255 / .15);
-    --jw-shade-ch: 6 8 14;
+    --jw-shade-ch: 7 8 11;
 }
 
-/* Rot / Schwarz ("Blue Radiance") */
-:where(html[data-theme="blueradiance"]) {
-    --jw-scheme: dark;
-    --jw-accent: #dc1f2e;
-    --jw-accent-ch: 220 31 46;
-    --jw-accent-hi: #ee3646;
-    --jw-accent-lo: #b3121f;
-    --jw-accent-text: #ff6670;
-    --jw-on-accent: #ffffff;
-    --jw-on-accent-ch: 255 255 255;
-    --jw-hero-accent: #dc1f2e;
-    --jw-hero-accent-ch: 220 31 46;
-    --jw-hero-on-accent: #ffffff;
-    --jw-bg: #09090b;
-    --jw-bg-ch: 9 9 11;
-    --jw-surface: #131316;
-    --jw-surface-ch: 19 19 22;
-    --jw-surface-2: #1a1a1e;
-    --jw-surface-3: #242429;
-    --jw-text: #f2f2f4;
-    --jw-text-ch: 242 242 244;
-    --jw-text-2: rgb(242 242 244 / .70);
-    --jw-text-3: rgb(242 242 244 / .48);
-    --jw-line: rgb(255 255 255 / .08);
-    --jw-line-2: rgb(255 255 255 / .15);
-    --jw-shade-ch: 7 7 9;
-}
-
-/* Schwarz / Weiss ("WMC") */
-:where(html[data-theme="wmc"]) {
-    --jw-scheme: dark;
-    --jw-accent: #ffffff;
-    --jw-accent-ch: 255 255 255;
-    --jw-accent-hi: #ffffff;
-    --jw-accent-lo: #d6d6d6;
-    --jw-accent-text: #ffffff;
-    --jw-on-accent: #000000;
-    --jw-on-accent-ch: 0 0 0;
-    --jw-hero-accent: #ffffff;
-    --jw-hero-accent-ch: 255 255 255;
-    --jw-hero-on-accent: #000000;
-    --jw-bg: #000000;
-    --jw-bg-ch: 0 0 0;
-    --jw-surface: #0e0e0e;
-    --jw-surface-ch: 14 14 14;
-    --jw-surface-2: #161616;
-    --jw-surface-3: #222222;
-    --jw-text: #ffffff;
-    --jw-text-ch: 255 255 255;
-    --jw-text-2: rgb(255 255 255 / .68);
-    --jw-text-3: rgb(255 255 255 / .45);
-    --jw-line: rgb(255 255 255 / .09);
-    --jw-line-2: rgb(255 255 255 / .18);
-    --jw-shade-ch: 0 0 0;
-}
-
-/* Weiss / Schwarz – hell ("Light") */
+/* Light: hell, blauer Akzent */
 :where(html[data-theme="light"]) {
-    --jw-scheme: light;
-    --jw-accent: #111113;
-    --jw-accent-ch: 17 17 19;
-    --jw-accent-hi: #2b2b30;
-    --jw-accent-lo: #000000;
-    --jw-accent-text: #111113;
-    --jw-on-accent: #ffffff;
-    --jw-on-accent-ch: 255 255 255;
-    --jw-hero-accent: #ffffff;
-    --jw-hero-accent-ch: 255 255 255;
-    --jw-hero-on-accent: #000000;
-    --jw-bg: #f3f3f5;
-    --jw-bg-ch: 243 243 245;
-    --jw-surface: #ffffff;
-    --jw-surface-ch: 255 255 255;
-    --jw-surface-2: #ececf0;
-    --jw-surface-3: #e0e0e6;
-    --jw-text: #0b0b0d;
-    --jw-text-ch: 11 11 13;
-    --jw-text-2: rgb(11 11 13 / .68);
-    --jw-text-3: rgb(11 11 13 / .46);
-    --jw-line: rgb(0 0 0 / .08);
-    --jw-line-2: rgb(0 0 0 / .16);
-    --jw-shade-ch: 10 10 12;
-}
-
-/* Weiss / Blau – hell ("Apple TV") */
-:where(html[data-theme="appletv"]) {
     --jw-scheme: light;
     --jw-accent: #1f5fd6;
     --jw-accent-ch: 31 95 214;
@@ -168,25 +81,72 @@
     --jw-accent-text: #1a55c4;
     --jw-on-accent: #ffffff;
     --jw-on-accent-ch: 255 255 255;
-    --jw-hero-accent: #2f6fe6;
-    --jw-hero-accent-ch: 47 111 230;
-    --jw-hero-on-accent: #ffffff;
-    --jw-bg: #f3f5f9;
-    --jw-bg-ch: 243 245 249;
+    --jw-bg: #f4f5f7;
+    --jw-bg-ch: 244 245 247;
     --jw-surface: #ffffff;
     --jw-surface-ch: 255 255 255;
-    --jw-surface-2: #eaeef5;
-    --jw-surface-3: #dfe4ee;
-    --jw-text: #0c1018;
-    --jw-text-ch: 12 16 24;
-    --jw-text-2: rgb(12 16 24 / .68);
-    --jw-text-3: rgb(12 16 24 / .46);
+    --jw-surface-2: #eceef2;
+    --jw-surface-3: #e0e3e9;
+    --jw-text: #0d0f14;
+    --jw-text-ch: 13 15 20;
+    --jw-text-2: rgb(13 15 20 / .68);
+    --jw-text-3: rgb(13 15 20 / .46);
     --jw-line: rgb(0 0 0 / .08);
     --jw-line-2: rgb(0 0 0 / .16);
-    --jw-shade-ch: 8 10 16;
+    --jw-shade-ch: 10 11 14;
 }
 
-/* Violett / Schwarz ("Purple Haze") */
+/* Apple TV: hell, silbergrau */
+:where(html[data-theme="appletv"]) {
+    --jw-scheme: light;
+    --jw-accent: #2c2c2e;
+    --jw-accent-ch: 44 44 46;
+    --jw-accent-hi: #48484a;
+    --jw-accent-lo: #1c1c1e;
+    --jw-accent-text: #1c1c1e;
+    --jw-on-accent: #ffffff;
+    --jw-on-accent-ch: 255 255 255;
+    --jw-bg: #e9ebee;
+    --jw-bg-ch: 233 235 238;
+    --jw-surface: #f7f8fa;
+    --jw-surface-ch: 247 248 250;
+    --jw-surface-2: #dfe2e7;
+    --jw-surface-3: #d3d7de;
+    --jw-text: #1c1c1e;
+    --jw-text-ch: 28 28 30;
+    --jw-text-2: rgb(28 28 30 / .70);
+    --jw-text-3: rgb(28 28 30 / .48);
+    --jw-line: rgb(0 0 0 / .09);
+    --jw-line-2: rgb(0 0 0 / .17);
+    --jw-shade-ch: 12 12 14;
+}
+
+/* Blue Radiance: dunkelblau */
+:where(html[data-theme="blueradiance"]) {
+    --jw-scheme: dark;
+    --jw-accent: #3d8bff;
+    --jw-accent-ch: 61 139 255;
+    --jw-accent-hi: #64a3ff;
+    --jw-accent-lo: #2a6fe0;
+    --jw-accent-text: #8cbcff;
+    --jw-on-accent: #ffffff;
+    --jw-on-accent-ch: 255 255 255;
+    --jw-bg: #040b1a;
+    --jw-bg-ch: 4 11 26;
+    --jw-surface: #0a1428;
+    --jw-surface-ch: 10 20 40;
+    --jw-surface-2: #0f1c36;
+    --jw-surface-3: #172646;
+    --jw-text: #eaf1ff;
+    --jw-text-ch: 234 241 255;
+    --jw-text-2: rgb(234 241 255 / .72);
+    --jw-text-3: rgb(234 241 255 / .50);
+    --jw-line: rgb(150 180 255 / .10);
+    --jw-line-2: rgb(150 180 255 / .18);
+    --jw-shade-ch: 3 8 19;
+}
+
+/* Purple Haze: violett */
 :where(html[data-theme="purplehaze"]) {
     --jw-scheme: dark;
     --jw-accent: #7c5cf0;
@@ -196,22 +156,44 @@
     --jw-accent-text: #ad98ff;
     --jw-on-accent: #ffffff;
     --jw-on-accent-ch: 255 255 255;
-    --jw-hero-accent: #7c5cf0;
-    --jw-hero-accent-ch: 124 92 240;
-    --jw-hero-on-accent: #ffffff;
-    --jw-bg: #09080f;
-    --jw-bg-ch: 9 8 15;
-    --jw-surface: #13111c;
-    --jw-surface-ch: 19 17 28;
-    --jw-surface-2: #1a1726;
-    --jw-surface-3: #242034;
+    --jw-bg: #0b0814;
+    --jw-bg-ch: 11 8 20;
+    --jw-surface: #151122;
+    --jw-surface-ch: 21 17 34;
+    --jw-surface-2: #1c172d;
+    --jw-surface-3: #26203b;
     --jw-text: #f3f1fa;
     --jw-text-ch: 243 241 250;
     --jw-text-2: rgb(243 241 250 / .70);
     --jw-text-3: rgb(243 241 250 / .48);
     --jw-line: rgb(255 255 255 / .08);
     --jw-line-2: rgb(255 255 255 / .15);
-    --jw-shade-ch: 8 7 13;
+    --jw-shade-ch: 9 7 15;
+}
+
+/* WMC: blau mit grünem Akzent (Windows Media Center) */
+:where(html[data-theme="wmc"]) {
+    --jw-scheme: dark;
+    --jw-accent: #127f4b;
+    --jw-accent-ch: 18 127 75;
+    --jw-accent-hi: #179a5b;
+    --jw-accent-lo: #0e663c;
+    --jw-accent-text: #4fd08e;
+    --jw-on-accent: #ffffff;
+    --jw-on-accent-ch: 255 255 255;
+    --jw-bg: #071a3a;
+    --jw-bg-ch: 7 26 58;
+    --jw-surface: #0c2450;
+    --jw-surface-ch: 12 36 80;
+    --jw-surface-2: #112c5e;
+    --jw-surface-3: #18376e;
+    --jw-text: #eaf2ff;
+    --jw-text-ch: 234 242 255;
+    --jw-text-2: rgb(234 242 255 / .72);
+    --jw-text-3: rgb(234 242 255 / .50);
+    --jw-line: rgb(140 190 255 / .12);
+    --jw-line-2: rgb(140 190 255 / .2);
+    --jw-shade-ch: 5 18 40;
 }
 
 /* Jellyfin- und MUI-Farben auf die Theme-Farben umleiten */
@@ -275,12 +257,6 @@ html:not([data-theme]) {
     --jf-overlays-8: none;
     --jf-overlays-16: none;
     --jf-overlays-24: none;
-
-    /* Logo-Zeichen: Sonnenfinsternis (Mond vor der Sonne) */
-    --jw-mark:
-        radial-gradient(44% 44% at 62% 38%, var(--jw-bg) 0 94%, rgb(var(--jw-bg-ch) / 0) 100%),
-        radial-gradient(50% 50% at 50% 50%, var(--jw-accent) 0 93%, rgb(var(--jw-accent-ch) / 0) 100%);
-    --jw-mark-ring: inset 0 0 0 1.5px rgb(var(--jw-accent-ch) / .45);
 }
 
 /* =========================================================================
@@ -423,100 +399,10 @@ header.MuiAppBar-root .MuiAvatar-root {
     color: var(--jw-text);
 }
 
-/* Logo: Server-Name ausblenden, Zeichen + Name anzeigen */
-header.MuiAppBar-root a.MuiButton-root[href="#/"] {
-    font-size: 0 !important;
-    line-height: 1;
-    padding: 6px 10px 6px 6px;
-    margin-right: 10px;
-    border-radius: var(--jw-r);
-    min-width: 0;
-    background: none;
-}
-
-header.MuiAppBar-root a.MuiButton-root[href="#/"]:hover {
-    background: rgb(var(--jw-text-ch) / .05);
-}
-
-header.MuiAppBar-root a.MuiButton-root[href="#/"] .MuiButton-startIcon,
-.MuiDrawer-paper a[href="#/"] .MuiListItemIcon-root,
-.skinHeader .pageTitleWithDefaultLogo::before,
-#loginPage > .padded-left::before {
-    border-radius: 50%;
-    background: var(--jw-mark);
-    box-shadow: var(--jw-mark-ring);
-}
-
-header.MuiAppBar-root a.MuiButton-root[href="#/"] .MuiButton-startIcon {
-    width: 24px;
-    height: 24px;
-    margin: 0 10px 0 0;
-}
-
-header.MuiAppBar-root a.MuiButton-root[href="#/"] .MuiButton-startIcon img {
-    display: none;
-}
-
-header.MuiAppBar-root a.MuiButton-root[href="#/"]::after,
-.skinHeader .pageTitleWithDefaultLogo::after,
-.MuiDrawer-paper a[href="#/"] .MuiListItemText-primary::after {
-    content: var(--jw-brand);
-    font: 700 1.15rem/1 var(--jw-font-display);
-    letter-spacing: .14em;
-    color: var(--jw-text);
-    white-space: nowrap;
-}
-
-/* Handy: Logo neben dem Menü-Knopf */
-@media (max-width: 899.95px) {
-    header.MuiAppBar-root .MuiToolbar-root:not(:has(a[href="#/"])) > .MuiBox-root {
-        order: 2;
-    }
-
-    header.MuiAppBar-root .MuiToolbar-root:not(:has(a[href="#/"]))::before {
-        content: "";
-        order: 1;
-        flex: none;
-        width: 22px;
-        height: 22px;
-        margin: 0 9px 0 6px;
-        border-radius: 50%;
-        background: var(--jw-mark);
-        box-shadow: var(--jw-mark-ring);
-        pointer-events: none;
-    }
-
-    header.MuiAppBar-root .MuiToolbar-root:not(:has(a[href="#/"]))::after {
-        content: var(--jw-brand);
-        order: 1;
-        font: 700 1.05rem/1 var(--jw-font-display);
-        letter-spacing: .14em;
-        color: var(--jw-text);
-        white-space: nowrap;
-        pointer-events: none;
-    }
-}
-
 /* Seitenleiste (Handy) */
 .MuiDrawer-paper {
     background: var(--jw-bg) !important;
     border-right: 1px solid var(--jw-line) !important;
-}
-
-.MuiDrawer-paper a[href="#/"] .MuiListItemIcon-root {
-    flex: none;
-    width: 30px;
-    height: 30px;
-    min-width: 0 !important;
-    margin-right: 14px;
-}
-
-.MuiDrawer-paper a[href="#/"] .MuiListItemIcon-root > * {
-    display: none;
-}
-
-.MuiDrawer-paper a[href="#/"] .MuiListItemText-primary {
-    font-size: 0 !important;
 }
 
 .MuiDrawer-paper .MuiListItemButton-root {
@@ -546,23 +432,6 @@ header.MuiAppBar-root a.MuiButton-root[href="#/"]::after,
 
 .layout-tv .skinHeader-withBackground {
     background: none !important;
-}
-
-.skinHeader .pageTitleWithDefaultLogo {
-    background-image: none !important;
-    display: inline-flex;
-    align-items: center;
-    width: auto !important;
-    height: auto !important;
-    min-height: 1.5em;
-}
-
-.skinHeader .pageTitleWithDefaultLogo::before {
-    content: "";
-    flex: none;
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
 }
 
 .mainDrawer {
@@ -706,7 +575,6 @@ header.MuiAppBar-root .MuiButton-contained.MuiButton-colorPrimary {
 @media (hover: hover) and (pointer: fine) {
     .card-hoverable:hover .cardScalable {
         transform: translateY(-2px);
-        box-shadow: 0 0 0 2px var(--jw-accent);
     }
 }
 
@@ -941,10 +809,42 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     display: none !important;
 }
 
-/* Hintergrund: ruhige Farbfläche, leicht in den Farben des Posters getönt */
+/* Farben der Knöpfe: aus den Farben des jeweiligen Posters (Blurhash von Jellyfin) */
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .blurhash-canvas {
-    opacity: .4 !important;
-    border-radius: 0;
+    position: absolute !important;
+    z-index: 2;
+    top: auto !important;
+    right: auto !important;
+    left: var(--jw-pad-x) !important;
+    bottom: var(--jw-pad-y) !important;
+    width: calc(var(--jw-play-w) + 168px) !important;
+    height: 46px !important;
+    border-radius: 0 !important;
+    opacity: 1 !important;
+    object-fit: cover;
+    object-position: 50% 40%;
+    filter: saturate(1.5) brightness(.7) contrast(1.05);
+    pointer-events: none;
+    -webkit-mask:
+        linear-gradient(#000 0 0) 8px 0 / calc(var(--jw-play-w) - 16px) 46px no-repeat,
+        linear-gradient(#000 0 0) 0 8px / var(--jw-play-w) 30px no-repeat,
+        radial-gradient(closest-side, #000 calc(100% - .5px), transparent) 0 0 / 16px 16px no-repeat,
+        radial-gradient(closest-side, #000 calc(100% - .5px), transparent) calc(var(--jw-play-w) - 16px) 0 / 16px 16px no-repeat,
+        radial-gradient(closest-side, #000 calc(100% - .5px), transparent) 0 30px / 16px 16px no-repeat,
+        radial-gradient(closest-side, #000 calc(100% - .5px), transparent) calc(var(--jw-play-w) - 16px) 30px / 16px 16px no-repeat,
+        radial-gradient(closest-side, #000 calc(100% - .5px), transparent) calc(var(--jw-play-w) + 10px) 0 / 46px 46px no-repeat,
+        radial-gradient(closest-side, #000 calc(100% - .5px), transparent) calc(var(--jw-play-w) + 66px) 0 / 46px 46px no-repeat,
+        radial-gradient(closest-side, #000 calc(100% - .5px), transparent) calc(var(--jw-play-w) + 122px) 0 / 46px 46px no-repeat;
+    mask:
+        linear-gradient(#000 0 0) 8px 0 / calc(var(--jw-play-w) - 16px) 46px no-repeat,
+        linear-gradient(#000 0 0) 0 8px / var(--jw-play-w) 30px no-repeat,
+        radial-gradient(closest-side, #000 calc(100% - .5px), transparent) 0 0 / 16px 16px no-repeat,
+        radial-gradient(closest-side, #000 calc(100% - .5px), transparent) calc(var(--jw-play-w) - 16px) 0 / 16px 16px no-repeat,
+        radial-gradient(closest-side, #000 calc(100% - .5px), transparent) 0 30px / 16px 16px no-repeat,
+        radial-gradient(closest-side, #000 calc(100% - .5px), transparent) calc(var(--jw-play-w) - 16px) 30px / 16px 16px no-repeat,
+        radial-gradient(closest-side, #000 calc(100% - .5px), transparent) calc(var(--jw-play-w) + 10px) 0 / 46px 46px no-repeat,
+        radial-gradient(closest-side, #000 calc(100% - .5px), transparent) calc(var(--jw-play-w) + 66px) 0 / 46px 46px no-repeat,
+        radial-gradient(closest-side, #000 calc(100% - .5px), transparent) calc(var(--jw-play-w) + 122px) 0 / 46px 46px no-repeat;
 }
 
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardScalable::after {
@@ -953,7 +853,9 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    background: linear-gradient(90deg, rgb(var(--jw-shade-ch) / .94) 0%, rgb(var(--jw-shade-ch) / .84) 38%, rgb(var(--jw-shade-ch) / .55) 70%, rgb(var(--jw-shade-ch) / .65) 100%);
+    background:
+        linear-gradient(90deg, rgb(var(--jw-shade-ch) / .86) 0%, rgb(var(--jw-shade-ch) / .68) 34%, rgb(var(--jw-shade-ch) / .32) 62%, rgb(var(--jw-shade-ch) / .22) 100%),
+        linear-gradient(0deg, rgb(var(--jw-shade-ch) / .55) 0%, rgb(var(--jw-shade-ch) / 0) 40%);
 }
 
 /* Das Bild-Element füllt die Folie (klickbar), das Poster zeigt es über ::after */
@@ -965,6 +867,17 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     contain: none !important;
     border-radius: 0 !important;
     background-size: 0 0 !important;
+}
+
+/* Hintergrund: das Poster des Films, gross und leicht weichgezeichnet */
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardImageContainer::before {
+    content: "";
+    position: absolute;
+    inset: -40px;
+    background: inherit;
+    background-size: cover;
+    background-position: center 30%;
+    filter: blur(6px);
 }
 
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardImageContainer::after {
@@ -1003,7 +916,7 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 }
 
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .innerCardFooter .itemProgressBarForeground {
-    background: var(--jw-hero-accent) !important;
+    background: rgb(255 255 255 / .9) !important;
 }
 
 /* Knöpfe */
@@ -1021,18 +934,20 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayContainer > .cardOverlayFab-primary,
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardScalable > .cardOverlayButton {
     margin: 0 !important;
-    width: auto !important;
+    width: var(--jw-play-w) !important;
     height: 46px !important;
-    padding: 0 22px 0 16px !important;
+    padding: 0 !important;
     display: inline-flex !important;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     opacity: 1 !important;
     border-radius: var(--jw-r) !important;
     font-size: 1rem !important;
-    background: var(--jw-hero-accent) !important;
-    color: var(--jw-hero-on-accent) !important;
-    box-shadow: none !important;
+    background: rgb(255 255 255 / .05) !important;
+    color: #fff !important;
+    text-shadow: 0 1px 2px rgb(0 0 0 / .55);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / .2) !important;
     transform: none !important;
 }
 
@@ -1051,7 +966,7 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayContainer > .cardOverlayFab-primary:hover,
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardScalable > .cardOverlayButton:hover {
-    filter: brightness(1.12);
+    background: rgb(255 255 255 / .16) !important;
 }
 
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayContainer > .cardOverlayFab-primary .cardOverlayButtonIcon,
@@ -1082,11 +997,13 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     margin: 0 !important;
     border-radius: 50%;
     color: #fff;
-    background: rgb(255 255 255 / .12) !important;
+    background: rgb(255 255 255 / .05) !important;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / .2);
+    filter: drop-shadow(0 1px 1px rgb(0 0 0 / .45));
 }
 
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayButton-br .cardOverlayButton:hover {
-    background: rgb(255 255 255 / .22) !important;
+    background: rgb(255 255 255 / .16) !important;
 }
 
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayButton-br .cardOverlayButtonIcon {
@@ -1112,6 +1029,7 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     color: #fff;
     font: 700 clamp(1.9rem, 3.6vw, 3.1rem)/1.1 var(--jw-font-display);
     letter-spacing: -.01em;
+    text-shadow: 0 2px 14px rgb(0 0 0 / .45);
 }
 
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardText-first a {
@@ -1125,8 +1043,9 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
 
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardText-secondary {
     bottom: calc(var(--jw-pad-y) + 46px + 20px);
-    color: rgb(255 255 255 / .72) !important;
+    color: rgb(255 255 255 / .8) !important;
     font: 500 1rem/1.2 var(--jw-font-display);
+    text-shadow: 0 1px 6px rgb(0 0 0 / .5);
 }
 
 /* Fortschritts-Striche unten rechts */
@@ -1140,7 +1059,7 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     width: 22px;
     height: 3px;
     border-radius: 2px;
-    background: linear-gradient(var(--jw-hero-accent), var(--jw-hero-accent)) 0 0 / 0% 100% no-repeat, rgb(255 255 255 / .25);
+    background: linear-gradient(#fff, #fff) 0 0 / 0% 100% no-repeat, rgb(255 255 255 / .28);
     opacity: calc(1 - var(--jw-off));
     animation-name: var(--jw-bar);
     animation-duration: calc(var(--jw-k) * var(--jw-hero-interval));
@@ -1180,7 +1099,13 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     }
 
     html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardScalable::after {
-        background: linear-gradient(0deg, rgb(var(--jw-shade-ch) / .95) 0%, rgb(var(--jw-shade-ch) / .84) 34%, rgb(var(--jw-shade-ch) / .55) 64%, rgb(var(--jw-shade-ch) / .62) 100%);
+        background: linear-gradient(0deg, rgb(var(--jw-shade-ch) / .92) 0%, rgb(var(--jw-shade-ch) / .72) 34%, rgb(var(--jw-shade-ch) / .32) 62%, rgb(var(--jw-shade-ch) / .4) 100%);
+    }
+
+    html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .blurhash-canvas {
+        left: 50% !important;
+        width: var(--jw-play-w) !important;
+        transform: translateX(-50%);
     }
 
     html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardOverlayContainer {
@@ -1613,37 +1538,10 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     max-width: 430px;
 }
 
-#loginPage > .padded-left::before {
-    content: "";
-    order: -2;
-    flex: none;
-    align-self: center;
-    width: 56px;
-    height: 56px;
-    margin-bottom: 18px;
-    box-shadow: inset 0 0 0 2px rgb(var(--jw-accent-ch) / .45);
-}
-
-#loginPage > .padded-left::after {
-    content: var(--jw-brand);
-    order: -1;
-    display: block;
-    text-align: center;
-    margin: 0 auto 28px;
-    padding-left: .16em;
-    font: 700 clamp(2rem, 5vw, 2.8rem)/1 var(--jw-font-display);
-    letter-spacing: .16em;
-    color: var(--jw-text);
-}
-
 #loginPage .sectionTitle {
     font-size: 1.1rem;
     font-weight: 500;
     color: var(--jw-text-2);
-}
-
-html:has(#loginPage:not(.hide)) header.MuiAppBar-root a[href="#/"] {
-    visibility: hidden;
 }
 
 /* =========================================================================
