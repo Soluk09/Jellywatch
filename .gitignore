@@ -1,0 +1,23 @@
+# Lokale Dateien mit echten Adressen oder Zugangsdaten gehören NICHT ins öffentliche Repo.
+.env
+.env.*
+*.local.json
+*.local.css
+config.local.json
+secrets.json
+credentials.json
+*.key
+*.pem
+
+# System- und Editor-Dateien
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*~
+
+# Werkzeuge
+node_modules/
+__pycache__/

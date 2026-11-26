@@ -1,0 +1,62 @@
+{
+  "includeCorsCredentials": false,
+  "multiserver": false,
+  "themes": [
+    {
+      "name": "Rot / Schwarz",
+      "id": "dark",
+      "color": "#070709",
+      "default": true
+    },
+    {
+      "name": "Schwarz / Weiss",
+      "id": "wmc",
+      "color": "#000000"
+    },
+    {
+      "name": "Weiss / Schwarz (hell)",
+      "id": "light",
+      "color": "#f3f3f5"
+    },
+    {
+      "name": "Weiss / Rot (hell)",
+      "id": "appletv",
+      "color": "#f4f4f6"
+    },
+    {
+      "name": "Blau / Schwarz",
+      "id": "blueradiance",
+      "color": "#05070d"
+    },
+    {
+      "name": "Violett / Schwarz",
+      "id": "purplehaze",
+      "color": "#08060f"
+    }
+  ],
+  "menuLinks": [
+    {
+      "name": "Anfragen",
+      "icon": "add_circle",
+      "url": "https://seerr.example.com"
+    }
+  ],
+  "servers": [],
+  "plugins": [
+    "playAccessValidation/plugin",
+    "experimentalWarnings/plugin",
+    "htmlAudioPlayer/plugin",
+    "htmlVideoPlayer/plugin",
+    "photoPlayer/plugin",
+    "comicsPlayer/plugin",
+    "bookPlayer/plugin",
+    "youtubePlayer/plugin",
+    "backdropScreensaver/plugin",
+    "pdfPlayer/plugin",
+    "logoScreensaver/plugin",
+    "sessionPlayer/plugin",
+    "chromecastPlayer/plugin",
+    "stillWatching/plugin",
+    "syncPlay/plugin"
+  ]
+}
