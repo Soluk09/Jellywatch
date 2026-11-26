@@ -3,35 +3,35 @@
   "multiserver": false,
   "themes": [
     {
-      "name": "Blau / Schwarz",
+      "name": "Apple TV",
+      "id": "appletv",
+      "color": "#e9ebee"
+    },
+    {
+      "name": "Blue Radiance",
+      "id": "blueradiance",
+      "color": "#040b1a"
+    },
+    {
+      "name": "Dark",
       "id": "dark",
-      "color": "#080b12",
+      "color": "#0b0c10",
       "default": true
     },
     {
-      "name": "Rot / Schwarz",
-      "id": "blueradiance",
-      "color": "#09090b"
-    },
-    {
-      "name": "Schwarz / Weiss",
-      "id": "wmc",
-      "color": "#000000"
-    },
-    {
-      "name": "Weiss / Schwarz (hell)",
+      "name": "Light",
       "id": "light",
-      "color": "#f3f3f5"
+      "color": "#f4f5f7"
     },
     {
-      "name": "Weiss / Blau (hell)",
-      "id": "appletv",
-      "color": "#f3f5f9"
-    },
-    {
-      "name": "Violett / Schwarz",
+      "name": "Purple Haze",
       "id": "purplehaze",
-      "color": "#09080f"
+      "color": "#0b0814"
+    },
+    {
+      "name": "WMC",
+      "id": "wmc",
+      "color": "#071a3a"
     }
   ],
   "menuLinks": [

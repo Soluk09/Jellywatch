@@ -8,9 +8,9 @@ Ein dunkles Theme für Jellyfin 12. Es besteht nur aus CSS: kein JavaScript, kei
 
 ## Funktionen
 
-- **Slideshow** oben auf der Startseite: 6 Filme aus den zuletzt hinzugefügten. In Chrome, Edge und Safari wird bei jedem Laden zufällig ausgewählt.
-- **Sechs Farbvarianten**, die jeder Benutzer selbst wählt. Standard ist Blau/Schwarz.
-- **Logo „ECLIPSE“** statt dem Jellyfin-Logo. Der Name lässt sich ändern.
+- **Slideshow** oben auf der Startseite: 6 Filme aus den zuletzt hinzugefügten, mit dem Poster als Hintergrund. In Chrome, Edge und Safari wird bei jedem Laden zufällig ausgewählt.
+- Die Knöpfe in der Slideshow übernehmen die **Farben des jeweiligen Films**.
+- **Sechs Farbvarianten**, passend zu den Theme-Namen von Jellyfin. Jeder Benutzer wählt selbst.
 - Optional ein Knopf **„Anfragen“** für Seerr, ohne API-Key.
 - Angepasst für Computer, Handy und TV.
 
@@ -37,25 +37,26 @@ Das Theme gilt danach für alle Benutzer. Es wird bewusst kopiert und nicht per 
 
 Jeder Benutzer: **Einstellungen → Anzeige → Theme**.
 
-| Theme in Jellyfin | Farbe |
+| Theme in Jellyfin | Aussehen |
 |---|---|
-| Dark (Standard) | Blau / Schwarz |
-| Blue Radiance | Rot / Schwarz |
-| WMC | Schwarz / Weiss |
-| Light | Weiss / Schwarz (hell) |
-| Apple TV | Weiss / Blau (hell) |
-| Purple Haze | Violett / Schwarz |
+| Dark (Standard) | dunkel, blauer Akzent |
+| Light | hell, blauer Akzent |
+| Apple TV | hell, silbergrau |
+| Blue Radiance | dunkelblau |
+| Purple Haze | violett |
+| WMC | blau mit grünem Akzent, wie Windows Media Center |
 
 ![Farbvarianten](screenshots/farbvarianten.jpg)
 
-Mit der optionalen [`extras/config.json`](extras/config.json) stehen im Menü direkt die deutschen Namen („Blau / Schwarz“ usw.), siehe unten.
-Die Anmeldeseite verwendet immer die Standardfarbe, weil Jellyfin dort den Benutzer noch nicht kennt.
+Die Anmeldeseite verwendet immer die Standardfarbe (Dark), weil Jellyfin dort den Benutzer noch nicht kennt.
 
 ## Slideshow
 
 Die Reihe „Kürzlich hinzugefügt in Filme“ wird oben auf der Startseite zu einem grossen Banner mit 6 Filmen:
 
 - Jellyfin liefert der Startseite die bis zu 16 neuesten Filme. Daraus wählt die Slideshow 6 aus.
+- Im Hintergrund ist das Poster des Films zu sehen. Es ist leicht weichgezeichnet, weil Jellyfin für die Startseite nur kleine Poster liefert und kein breites Hintergrundbild.
+- Der „Abspielen“-Knopf und die runden Knöpfe nehmen die Farben des Posters an, so sieht jeder Film anders aus.
 - In Browsern mit der CSS-Funktion `random()` (aktuelles Chrome, Edge und Safari) ist die Auswahl und Reihenfolge bei jedem Laden zufällig. Andere Browser zeigen die 6 neuesten.
 - Wechsel alle 7 Sekunden. Solange die Maus darauf ist, bleibt sie stehen.
 - Klick auf Poster oder Titel öffnet den Film, „Abspielen“ startet ihn.
@@ -107,7 +108,6 @@ Eigene Werte im Feld „Benutzerdefinierter CSS-Code“ **unter** dem Theme einf
 
 ```css
 :root {
-    --jw-brand: "MEINKINO";     /* Name oben links und auf der Anmeldeseite, mit Anführungszeichen */
     --jw-hero-interval: 9s;     /* Sekunden pro Film in der Slideshow */
     --jw-hero-height: 60vh;     /* Höhe der Slideshow am Computer */
 }
@@ -119,7 +119,6 @@ Eigene Akzentfarbe, als `#hex` und als `R G B`:
 :root {
     --jw-accent: #2f6fe6;       --jw-accent-ch: 47 111 230;
     --jw-accent-hi: #4a86f0;    --jw-accent-text: #7eaaff;
-    --jw-hero-accent: #2f6fe6;  --jw-hero-accent-ch: 47 111 230;
 }
 ```
 
