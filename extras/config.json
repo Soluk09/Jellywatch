@@ -3,10 +3,15 @@
   "multiserver": false,
   "themes": [
     {
-      "name": "Rot / Schwarz",
+      "name": "Blau / Schwarz",
       "id": "dark",
-      "color": "#070709",
+      "color": "#080b12",
       "default": true
+    },
+    {
+      "name": "Rot / Schwarz",
+      "id": "blueradiance",
+      "color": "#09090b"
     },
     {
       "name": "Schwarz / Weiss",
@@ -19,19 +24,14 @@
       "color": "#f3f3f5"
     },
     {
-      "name": "Weiss / Rot (hell)",
+      "name": "Weiss / Blau (hell)",
       "id": "appletv",
-      "color": "#f4f4f6"
-    },
-    {
-      "name": "Blau / Schwarz",
-      "id": "blueradiance",
-      "color": "#05070d"
+      "color": "#f3f5f9"
     },
     {
       "name": "Violett / Schwarz",
       "id": "purplehaze",
-      "color": "#08060f"
+      "color": "#09080f"
     }
   ],
   "menuLinks": [
