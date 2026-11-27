@@ -4,11 +4,13 @@
  *
  * Zeigt oben auf der Startseite zufällige Filme aus der ganzen Bibliothek, mit
  * dem grossen Hintergrundbild, Logo, Beschreibung, Pfeilen und Punkten.
+ * Bei "Weiterschauen" steht zusätzlich die Restzeit unter dem Titel.
  *
  * Sicherheit:
  * - Spricht nur mit deinem eigenen Jellyfin-Server, über die Anmeldung, die im
  *   Browser schon besteht. Es gibt keine Adressen zu anderen Servern.
- * - Stellt nur eine lesende Anfrage (eine Liste von Filmen). Abspielen, Favorit
+ * - Stellt nur lesende Anfragen: eine Liste von Filmen für die Slideshow und
+ *   Laufzeit und Fortschritt der Karten bei "Weiterschauen". Abspielen, Favorit
  *   und "Mehr Infos" laufen über Jellyfins eigene Knöpfe und Funktionen.
  * - Titel und Beschreibungen werden nur als Text eingefügt, nie als HTML.
  * - IDs und Bild-Kennungen werden geprüft, bevor sie in eine Adresse kommen.
@@ -631,6 +633,104 @@
         return { root: root, parts: parts, controls: { prev: prev, next: next, dots: dots } };
     }
 
+    /* ---------- Restzeit bei "Weiterschauen" ---------- */
+
+    var remainInfo = {}; /* id -> { key: Position laut Karte, rt: Laufzeit, pos: Position } */
+    var remainBusy = false;
+
+    function remainingText(ticks) {
+        var minutes = Math.max(1, Math.round(ticks / 600000000));
+        var h = Math.floor(minutes / 60);
+        var m = minutes % 60;
+        var value = h > 0 ? h + ' h ' + m + ' min' : m + ' min';
+        return t('noch ' + value, value + ' left');
+    }
+
+    function resumeCards() {
+        return Array.prototype.slice.call(document.querySelectorAll(
+            '#indexPage:not(.hide) .homeSectionsContainer .overflowBackdropCard[data-positionticks]'));
+    }
+
+    function showRemaining(card, info) {
+        var line = card.querySelector('.cardText-secondary');
+        if (!line || !info || !(info.rt > 0) || !(info.rt > info.pos)) {
+            return;
+        }
+        var label = remainingText(info.rt - info.pos);
+        var span = line.querySelector(':scope > .jw-remain');
+        if (!span) {
+            span = el('span', 'jw-remain');
+            line.appendChild(span);
+        }
+        if (span.textContent !== label) {
+            span.textContent = label;
+        }
+    }
+
+    function updateRemaining() {
+        if (remainBusy || HTML.classList.contains('layout-tv')) {
+            return;
+        }
+        var cards = resumeCards();
+        if (!cards.length || !themeReady()) {
+            return;
+        }
+        var client = getClient();
+        if (!client) {
+            return;
+        }
+        var missing = [];
+        cards.forEach(function (card) {
+            var id = card.getAttribute('data-id');
+            if (typeof id !== 'string' || !ID_RE.test(id)) {
+                return;
+            }
+            var key = card.getAttribute('data-positionticks') || '';
+            var info = remainInfo[id];
+            if (info && info.key === key) {
+                if (!card.querySelector('.cardText-secondary > .jw-remain')) {
+                    showRemaining(card, info);
+                }
+            } else if (missing.length < 50) {
+                /* jede Karte mit derselben Position nur einmal nachfragen */
+                remainInfo[id] = { key: key, rt: 0, pos: 0 };
+                missing.push(id);
+            }
+        });
+        if (!missing.length) {
+            return;
+        }
+        remainBusy = true;
+        client.getJSON(client.getUrl('Items', {
+            userId: client.getCurrentUserId(),
+            Ids: missing.join(','),
+            EnableImages: false,
+            EnableUserData: true,
+            EnableTotalRecordCount: false
+        })).then(function (res) {
+            (res && Array.isArray(res.Items) ? res.Items : []).forEach(function (it) {
+                if (!it || typeof it.Id !== 'string' || !ID_RE.test(it.Id) || !remainInfo[it.Id]) {
+                    return;
+                }
+                var rt = typeof it.RunTimeTicks === 'number' && isFinite(it.RunTimeTicks) ? it.RunTimeTicks : 0;
+                var ud = it.UserData && typeof it.UserData === 'object' ? it.UserData : {};
+                var pos = typeof ud.PlaybackPositionTicks === 'number' && isFinite(ud.PlaybackPositionTicks) ? ud.PlaybackPositionTicks : 0;
+                remainInfo[it.Id].rt = rt;
+                remainInfo[it.Id].pos = pos;
+            });
+            resumeCards().forEach(function (card) {
+                var info = remainInfo[card.getAttribute('data-id')];
+                if (info && info.key === (card.getAttribute('data-positionticks') || '')) {
+                    showRemaining(card, info);
+                }
+            });
+        }).catch(function () {
+            /* ohne Restzeit weitermachen */
+        }).then(function () {
+            remainBusy = false;
+        });
+    }
+
     /* ---------- Einbau in die Startseite ---------- */
 
     function homeTab() {
@@ -704,6 +804,7 @@
                 if (active) {
                     active.update();
                 }
+                updateRemaining();
             } catch (e) {
                 building = false;
                 console.warn('[Jellywatch]', e && e.message ? e.message : e);

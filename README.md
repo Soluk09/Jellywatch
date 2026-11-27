@@ -10,10 +10,14 @@ Ein Theme für Jellyfin 12. Das Theme selbst ist reines CSS: keine Plugins und k
 
 - **Slideshow** oben auf der Startseite mit 6 zufälligen Filmen: grosses Hintergrundbild, Logo, Beschreibung und Pfeile zum Vor- und Zurückblättern. Das braucht das optionale `jellywatch.js`. Ohne Skript zeigt eine reine CSS-Version die Poster der neuesten Filme.
 - Die Knöpfe in der Slideshow haben die **Farbe des jeweiligen Films**.
-- **Vorschau beim Drüberfahren:** Die Karte wird etwas grösser, Titel, Jahr und Knöpfe erscheinen auf dem Bild.
+- **Vorschau beim Drüberfahren:** Die Karte wird etwas grösser, die Knöpfe erscheinen auf dem Bild. Bei Postern rutschen auch Titel und Jahr aufs Bild, bei breiten Karten bleiben sie darunter.
+- **„Meine Medien“ als flache Kacheln:** Der Name steht nur einmal da. Kacheln ohne Bild, z.B. Playlists, bekommen einen Farbverlauf mit dem Namen.
+- **„Weiterschauen“** mit gut sichtbarem Fortschrittsbalken im Bild und der Restzeit, z.B. „noch 14 min“. Die Restzeit braucht `jellywatch.js`.
 - **Sechs Farbvarianten**, passend zu den Theme-Namen von Jellyfin. Jeder Benutzer wählt selbst.
 - Optional ein Knopf **„Anfragen“** für Seerr, ohne API-Key.
 - Angepasst für Computer, Handy und TV.
+
+![Meine Medien und Weiterschauen](screenshots/reihen.jpg)
 
 ![Vorschau beim Drüberfahren](screenshots/vorschau.jpg)
 
@@ -216,7 +220,15 @@ Eigene Akzentfarbe, als `#hex` und als `R G B`:
 }
 ```
 
-Die Slideshow mit Hintergrundbildern ausschalten, ohne etwas am Server zu ändern (dann gilt wieder die CSS-Version):
+Die kleinen Namen unter den Kacheln von „Meine Medien“ wieder anzeigen. Das ist nötig, falls deine Bibliotheks-Bilder keinen Namen enthalten:
+
+```css
+.homeSectionsContainer .card[data-type="CollectionFolder"]:not(:has(.defaultCardBackground)) .cardText {
+    display: block !important;
+}
+```
+
+Das Skript `jellywatch.js` ausschalten, ohne etwas am Server zu ändern. Dann gilt wieder die CSS-Slideshow, und die Restzeit fällt weg:
 
 ```css
 :root {
@@ -267,7 +279,7 @@ Das kann Jellyfin selbst über ⋮ → Download. Der Admin muss es pro Benutzer 
 **`jellywatch.js`:**
 
 - spricht nur mit deinem eigenen Jellyfin-Server und nutzt die Anmeldung, die im Browser schon besteht. Es enthält keine Adressen zu anderen Servern.
-- stellt nur eine lesende Anfrage (6 zufällige Filme). Jeder Benutzer sieht nur Filme, die er sehen darf. Abspielen, Favorit und das Menü erledigt Jellyfins eigener Code.
+- stellt nur lesende Anfragen: 6 zufällige Filme für die Slideshow, dazu Laufzeit und Fortschritt der Karten bei „Weiterschauen“ für die Restzeit. Jeder Benutzer sieht nur, was er sehen darf. Abspielen, Favorit und das Menü erledigt Jellyfins eigener Code.
 - fügt Titel und Beschreibungen nur als Text ein, nie als HTML.
 - speichert nichts und liest keine Passwörter oder Tokens.
 - Wenn etwas schiefgeht, verschwindet die Slideshow und die CSS-Version bleibt.

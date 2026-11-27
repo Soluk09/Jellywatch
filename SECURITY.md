@@ -16,7 +16,11 @@ Jellywatch besteht aus zwei Teilen:
 
 Es macht:
 
-- Beim Öffnen der Startseite **eine lesende Anfrage** an deinen Jellyfin-Server: 6 zufällige Filme mit Titel, Beschreibung und den Kennungen ihrer Bilder. Das ist dieselbe Art Anfrage, die Jellyfin für seine eigenen Seiten stellt, mit der Anmeldung, die im Browser schon besteht. Jeder Benutzer sieht deshalb nur Filme, die er sehen darf (Bibliotheks-Rechte und Altersfreigaben gelten weiter).
+- Auf der Startseite nur **lesende Anfragen** an deinen Jellyfin-Server:
+  - 6 zufällige Filme mit Titel, Beschreibung und den Kennungen ihrer Bilder für die Slideshow
+  - Laufzeit und Fortschritt der Karten unter „Weiterschauen“ für die Restzeit
+
+  Das ist dieselbe Art Anfrage, die Jellyfin für seine eigenen Seiten stellt, mit der Anmeldung, die im Browser schon besteht. Jeder Benutzer sieht deshalb nur, was er sehen darf (Bibliotheks-Rechte und Altersfreigaben gelten weiter).
 - Es zeigt Hintergrundbild und Logo von deinem Server an.
 - Abspielen, „Mehr Infos“, Favorit und das Rechtsklick-Menü erledigt **Jellyfins eigener Code**, wie bei jeder anderen Karte.
 - Für die Knopffarbe rechnet es die Durchschnittsfarbe des Hintergrundbilds aus, nur im Browser.
@@ -24,7 +28,7 @@ Es macht:
 Es macht nicht:
 
 - **Keine Verbindung zu anderen Servern.** Im Code steht keine einzige Adresse.
-- **Kein HTML aus der Datenbank.** Titel, Beschreibung und Genres werden nur als Text eingefügt (`textContent`). Ein Film mit dem Titel `<img src=x onerror=alert(1)>` zeigt genau diesen Text an und führt nichts aus.
+- **Kein HTML aus der Datenbank.** Titel, Beschreibung, Genres und die Restzeit werden nur als Text eingefügt (`textContent`). Ein Film mit dem Titel `<img src=x onerror=alert(1)>` zeigt genau diesen Text an und führt nichts aus.
 - **Keine ungeprüften Werte in Adressen.** IDs und Bild-Kennungen werden geprüft (nur Buchstaben und Ziffern), bevor sie in eine Bild-Adresse kommen.
 - **Nichts speichern.** Kein `localStorage`, keine Cookies, kein Tracking. Die zuletzt gezeigten Filme merkt es sich nur im Arbeitsspeicher, bis die Seite neu geladen wird.
 - **Keine Zugangsdaten.** Es liest keine Passwörter, Tokens oder API-Keys.
