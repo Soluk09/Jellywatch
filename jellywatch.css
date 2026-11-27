@@ -609,6 +609,104 @@ header.MuiAppBar-root .MuiButton-contained.MuiButton-colorPrimary {
 
 .itemProgressBarForeground {
     background: var(--jw-accent) !important;
+    border-radius: 3px;
+}
+
+/* Angefangene Filme und Folgen: dicker, abgerundeter Balken im Bild, mit Abstand zum Rand */
+.cardImageContainer > .innerCardFooter:has(> .itemProgressBar) {
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 10px !important;
+    width: auto !important;
+    padding: 0 !important;
+    background: none !important;
+}
+
+.cardImageContainer > .innerCardFooter > .itemProgressBar {
+    height: 5px;
+    background: rgb(0 0 0 / .5);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14);
+}
+
+/* Handy: der runde Abspielknopf sitzt über dem Balken statt darauf */
+.cardScalable:has(.itemProgressBar) > .cardOverlayButton {
+    bottom: 12px !important;
+}
+
+.homeSectionsContainer .overflowBackdropCard .cardText-first {
+    font-weight: 600;
+}
+
+/* Restzeit bei "Weiterschauen" (setzt jellywatch.js ein) */
+.cardText-secondary:has(> .jw-remain) {
+    display: flex;
+}
+
+.cardText-secondary:has(> .jw-remain) > bdi {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.jw-remain {
+    flex: none;
+    color: var(--jw-accent-text);
+    font-weight: 600;
+}
+
+.jw-remain::before {
+    content: "";
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    margin: 0 .5em;
+    border-radius: 50%;
+    background: var(--jw-text-3);
+    vertical-align: middle;
+}
+
+/* "Meine Medien": flache Kacheln. Jellyfin schreibt den Namen schon ins Bild,
+   deshalb fällt die kleine Beschriftung darunter weg. Kacheln ohne Bild (z.B.
+   Playlists) bekommen einen Farbverlauf und den Namen gross in die Mitte. */
+html:not(.layout-tv) .homeSectionsContainer .card:is([data-type="CollectionFolder"], [data-type="UserView"]) .cardPadder-overflowBackdrop {
+    padding-bottom: 32% !important;
+}
+
+html:not(.layout-tv) .homeSectionsContainer .card:is([data-type="CollectionFolder"], [data-type="UserView"]) > .cardBox {
+    position: relative;
+    margin-bottom: .9em !important;
+}
+
+html:not(.layout-tv) .homeSectionsContainer .card:is([data-type="CollectionFolder"], [data-type="UserView"]):not(:has(.defaultCardBackground)) .cardText {
+    display: none;
+}
+
+html:not(.layout-tv) .homeSectionsContainer .card:is([data-type="CollectionFolder"], [data-type="UserView"]) .cardImageContainer.defaultCardBackground {
+    background: linear-gradient(135deg, rgb(var(--jw-accent-ch) / .75) 0%, rgb(var(--jw-accent-ch) / .3) 55%, rgb(var(--jw-accent-ch) / .12) 100%), rgb(var(--jw-shade-ch)) !important;
+}
+
+html:not(.layout-tv) .homeSectionsContainer .card:is([data-type="CollectionFolder"], [data-type="UserView"]) .defaultCardBackground .cardImageIcon {
+    position: absolute;
+    top: 50%;
+    right: 6%;
+    transform: translateY(-50%);
+    font-size: clamp(2.6rem, 5vw, 6rem) !important;
+    color: rgb(255 255 255 / .16) !important;
+}
+
+html:not(.layout-tv) .homeSectionsContainer .card:is([data-type="CollectionFolder"], [data-type="UserView"]):has(.defaultCardBackground) .cardText-first {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 !important;
+    color: #fff;
+    font: 800 clamp(1.4rem, 2.5vw, 3rem)/1 var(--jw-font-display);
+    letter-spacing: -.01em;
+    text-shadow: 0 2px 10px rgb(0 0 0 / .35);
+    pointer-events: none;
 }
 
 .emby-scrollbuttons-button {
@@ -624,29 +722,22 @@ header.MuiAppBar-root .MuiButton-contained.MuiButton-colorPrimary {
     color: var(--jw-text) !important;
 }
 
-/* Vorschau beim Drüberfahren (nur mit Maus): Die Karte wird etwas grösser,
-   Titel und Jahr rutschen aufs Bild, darunter die Knöpfe. */
+/* Vorschau beim Drüberfahren (nur mit Maus): Die Karte wird etwas grösser und zeigt
+   die Knöpfe auf dem Bild. Bei Postern rutschen Titel und Jahr aufs Bild, bei breiten
+   Karten bleiben sie darunter, damit ein Logo im Bild frei bleibt. */
 @media (hover: hover) and (pointer: fine) {
     html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard, .overflowBackdropCard, .backdropCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card) > .cardBox {
-        --jw-lift: -6.3rem;
         transition: transform .22s cubic-bezier(.2, .7, .3, 1);
     }
 
-    html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard, .overflowBackdropCard, .backdropCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card) > .cardBox:not(:has(> .cardText-secondary)) {
-        --jw-lift: -5rem;
-    }
-
-    html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard, .overflowBackdropCard, .backdropCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card) > .cardBox:has(> .cardText-secondary ~ .cardText-secondary) {
-        --jw-lift: -7.6rem;
+    /* Jellyfin beschneidet jede Karte an ihrem Rand (contain: paint). Beim Vergrössern freigeben. */
+    html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard, .overflowBackdropCard, .backdropCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card):hover {
+        contain: layout style;
     }
 
     html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard, .overflowBackdropCard, .backdropCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card):hover > .cardBox {
         transform: scale(1.06);
         transition-delay: .08s;
-    }
-
-    html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard, .overflowBackdropCard, .backdropCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card) .cardOverlayContainer {
-        background: linear-gradient(to top, rgb(var(--jw-shade-ch) / .94) 0%, rgb(var(--jw-shade-ch) / .7) 30%, rgb(var(--jw-shade-ch) / .15) 58%, rgb(var(--jw-shade-ch) / 0) 72%);
     }
 
     html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard, .overflowBackdropCard, .backdropCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card):hover .cardOverlayContainer {
@@ -717,12 +808,29 @@ header.MuiAppBar-root .MuiButton-contained.MuiButton-colorPrimary {
         font-size: 1.3rem !important;
     }
 
-    html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard, .overflowBackdropCard, .backdropCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card) > .cardBox > .cardText {
+    /* Poster: Titel und Jahr rutschen aufs Bild */
+    html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card) > .cardBox {
+        --jw-lift: -6.3rem;
+    }
+
+    html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card) > .cardBox:not(:has(> .cardText-secondary)) {
+        --jw-lift: -5rem;
+    }
+
+    html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card) > .cardBox:has(> .cardText-secondary ~ .cardText-secondary) {
+        --jw-lift: -7.6rem;
+    }
+
+    html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card) .cardOverlayContainer {
+        background: linear-gradient(to top, rgb(var(--jw-shade-ch) / .94) 0%, rgb(var(--jw-shade-ch) / .7) 30%, rgb(var(--jw-shade-ch) / .15) 58%, rgb(var(--jw-shade-ch) / 0) 72%);
+    }
+
+    html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card) > .cardBox > .cardText {
         position: relative;
         transition: transform .22s cubic-bezier(.2, .7, .3, 1), padding .22s;
     }
 
-    html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard, .overflowBackdropCard, .backdropCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card):hover > .cardBox > .cardText {
+    html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card):hover > .cardBox > .cardText {
         z-index: 2;
         transform: translateY(var(--jw-lift));
         padding-left: .7rem;
@@ -733,16 +841,26 @@ header.MuiAppBar-root .MuiButton-contained.MuiButton-colorPrimary {
         transition-delay: .08s;
     }
 
-    html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard, .overflowBackdropCard, .backdropCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card):hover > .cardBox > .cardText-first {
+    html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card):hover > .cardBox > .cardText-first {
         font-weight: 600;
     }
 
-    html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard, .overflowBackdropCard, .backdropCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card):hover > .cardBox > .cardText-first a {
+    html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card):hover > .cardBox > .cardText-first a {
         pointer-events: auto;
     }
 
-    html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard, .overflowBackdropCard, .backdropCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card):hover > .cardBox > .cardText-secondary {
+    html:not(.layout-tv) .card-hoverable:is(.overflowPortraitCard, .portraitCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card):hover > .cardBox > .cardText-secondary {
         color: rgb(255 255 255 / .82) !important;
+    }
+
+    /* Breite Karten: nur die Knöpfe auf dem Bild, über dem Fortschrittsbalken */
+    html:not(.layout-tv) .card-hoverable:is(.overflowBackdropCard, .backdropCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card) .cardOverlayContainer {
+        background: linear-gradient(to top, rgb(var(--jw-shade-ch) / .8) 0%, rgb(var(--jw-shade-ch) / .35) 30%, rgb(var(--jw-shade-ch) / 0) 55%);
+    }
+
+    html:not(.layout-tv) .card-hoverable:is(.overflowBackdropCard, .backdropCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card):has(.itemProgressBar) .cardOverlayContainer > .cardOverlayFab-primary,
+    html:not(.layout-tv) .card-hoverable:is(.overflowBackdropCard, .backdropCard):not([data-type="CollectionFolder"], [data-type="UserView"], [data-type="Folder"], [data-type="Person"], .personCard):not(html:not(.layout-tv):not(.jw-js-hero) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .card):has(.itemProgressBar) .cardOverlayContainer .cardOverlayButton-br {
+        bottom: 1.6rem;
     }
 }
 
