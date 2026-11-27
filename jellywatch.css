@@ -809,21 +809,48 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     display: none !important;
 }
 
-/* Farben der Knöpfe: aus den Farben des jeweiligen Posters (Blurhash von Jellyfin) */
+/* Kein Blurhash im Banner (Farben kommen direkt aus dem Poster) */
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .blurhash-canvas {
+    display: none !important;
+}
+
+/* Abdunkeln, damit Titel und Knöpfe lesbar bleiben */
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardScalable::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        linear-gradient(90deg, rgb(var(--jw-shade-ch) / .74) 0%, rgb(var(--jw-shade-ch) / .6) 40%, rgb(var(--jw-shade-ch) / .45) 100%),
+        linear-gradient(0deg, rgb(var(--jw-shade-ch) / .35) 0%, rgb(var(--jw-shade-ch) / 0) 45%);
+}
+
+/* Hintergrund: die Durchschnittsfarbe des Posters.
+   Das Poster wird dafür auf 1 Pixel verkleinert und gekachelt, so entsteht eine
+   ruhige Fläche in der Farbe des Films, ohne Zoom und ohne Weichzeichner. */
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardImageContainer {
     position: absolute !important;
-    z-index: 2;
-    top: auto !important;
-    right: auto !important;
-    left: var(--jw-pad-x) !important;
-    bottom: var(--jw-pad-y) !important;
-    width: calc(var(--jw-play-w) + 168px) !important;
-    height: 46px !important;
+    inset: 0;
+    width: auto !important;
+    height: auto !important;
+    contain: none !important;
     border-radius: 0 !important;
-    opacity: 1 !important;
-    object-fit: cover;
-    object-position: 50% 40%;
-    filter: saturate(1.5) brightness(.7) contrast(1.05);
+    background-size: 1px 1px !important;
+    background-repeat: repeat !important;
+}
+
+/* Knöpfe: dieselbe Filmfarbe, kräftiger und dunkler, in Knopfform ausgeschnitten */
+html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardImageContainer::before {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    left: var(--jw-pad-x);
+    bottom: var(--jw-pad-y);
+    width: calc(var(--jw-play-w) + 168px);
+    height: 46px;
+    background: inherit;
+    filter: saturate(1.7) brightness(.72);
     pointer-events: none;
     -webkit-mask:
         linear-gradient(#000 0 0) 8px 0 / calc(var(--jw-play-w) - 16px) 46px no-repeat,
@@ -847,53 +874,21 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
         radial-gradient(closest-side, #000 calc(100% - .5px), transparent) calc(var(--jw-play-w) + 122px) 0 / 46px 46px no-repeat;
 }
 
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardScalable::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    background:
-        linear-gradient(90deg, rgb(var(--jw-shade-ch) / .86) 0%, rgb(var(--jw-shade-ch) / .68) 34%, rgb(var(--jw-shade-ch) / .32) 62%, rgb(var(--jw-shade-ch) / .22) 100%),
-        linear-gradient(0deg, rgb(var(--jw-shade-ch) / .55) 0%, rgb(var(--jw-shade-ch) / 0) 40%);
-}
-
-/* Das Bild-Element füllt die Folie (klickbar), das Poster zeigt es über ::after */
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardImageContainer {
-    position: absolute !important;
-    inset: 0;
-    width: auto !important;
-    height: auto !important;
-    contain: none !important;
-    border-radius: 0 !important;
-    background-size: 0 0 !important;
-}
-
-/* Hintergrund: das Poster des Films, gross und leicht weichgezeichnet */
-html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardImageContainer::before {
-    content: "";
-    position: absolute;
-    inset: -40px;
-    background: inherit;
-    background-size: cover;
-    background-position: center 30%;
-    filter: blur(6px);
-}
-
+/* Das Poster selbst: gross und scharf am rechten Rand, läuft weich in die Filmfarbe aus */
 html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardImageContainer::after {
     content: "";
     position: absolute;
     z-index: 2;
-    right: var(--jw-pad-x);
-    top: var(--jw-pad-y);
-    bottom: calc(var(--jw-pad-y) + 40px);
-    max-width: var(--jw-poster-w);
+    top: 0;
+    bottom: 0;
+    right: 0;
     aspect-ratio: 2 / 3;
     background: inherit;
-    background-size: cover;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
     background-position: center;
-    border-radius: var(--jw-r);
-    box-shadow: 0 18px 40px -14px rgb(0 0 0 / .75), 0 0 0 1px rgb(255 255 255 / .08);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 38%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 38%);
 }
 
 /* Fortschritt bei angefangenen Filmen: dünne Linie ganz unten */
@@ -1015,7 +1010,7 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     position: absolute;
     z-index: 3;
     left: var(--jw-pad-x);
-    right: calc(var(--jw-pad-x) * 2 + var(--jw-poster-w));
+    right: calc(var(--jw-hero-height) * .55 + var(--jw-pad-x));
     margin: 0;
     padding: 0 !important;
     text-align: left !important;
@@ -1054,8 +1049,8 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     position: absolute;
     z-index: 6;
     visibility: visible;
-    bottom: calc(var(--jw-pad-y) + 21px);
-    right: calc(var(--jw-pad-x) + (var(--jw-k) - 1 - var(--jw-p)) * 30px);
+    bottom: 18px;
+    right: calc(var(--jw-hero-height) / 3 - var(--jw-k) * 15px + (var(--jw-k) - 1 - var(--jw-p)) * 30px + 4px);
     width: 22px;
     height: 3px;
     border-radius: 2px;
@@ -1091,20 +1086,23 @@ html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitle
     }
 
     html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardImageContainer::after {
-        right: 50%;
-        top: 24px;
+        left: 0;
+        right: 0;
+        top: 0;
         bottom: auto;
-        height: 42%;
-        transform: translateX(50%);
+        width: 100%;
+        height: auto;
+        -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 88%);
+        mask-image: linear-gradient(to bottom, #000 45%, transparent 88%);
     }
 
     html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardScalable::after {
-        background: linear-gradient(0deg, rgb(var(--jw-shade-ch) / .92) 0%, rgb(var(--jw-shade-ch) / .72) 34%, rgb(var(--jw-shade-ch) / .32) 62%, rgb(var(--jw-shade-ch) / .4) 100%);
+        background: linear-gradient(0deg, rgb(var(--jw-shade-ch) / .7) 0%, rgb(var(--jw-shade-ch) / .5) 40%, rgb(var(--jw-shade-ch) / .35) 100%);
     }
 
-    html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .blurhash-canvas {
-        left: 50% !important;
-        width: var(--jw-play-w) !important;
+    html:not(.layout-tv) .homeSectionsContainer .verticalSection:has(> .sectionTitleContainer a[href*="collectionType=movies"]):not(:has(> .sectionTitleContainer a[href*="collectionType=movies"]) ~ *) .cardImageContainer::before {
+        left: 50%;
+        width: var(--jw-play-w);
         transform: translateX(-50%);
     }
 

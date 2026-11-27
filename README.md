@@ -8,7 +8,7 @@ Ein dunkles Theme für Jellyfin 12. Es besteht nur aus CSS: kein JavaScript, kei
 
 ## Funktionen
 
-- **Slideshow** oben auf der Startseite: 6 Filme aus den zuletzt hinzugefügten, mit dem Poster als Hintergrund. In Chrome, Edge und Safari wird bei jedem Laden zufällig ausgewählt.
+- **Slideshow** oben auf der Startseite: 6 Filme aus den zuletzt hinzugefügten, mit grossem Poster und einem Hintergrund in der Farbe des Films. In Chrome, Edge und Safari wird bei jedem Laden zufällig ausgewählt.
 - Die Knöpfe in der Slideshow übernehmen die **Farben des jeweiligen Films**.
 - **Sechs Farbvarianten**, passend zu den Theme-Namen von Jellyfin. Jeder Benutzer wählt selbst.
 - Optional ein Knopf **„Anfragen“** für Seerr, ohne API-Key.
@@ -55,8 +55,9 @@ Die Anmeldeseite verwendet immer die Standardfarbe (Dark), weil Jellyfin dort de
 Die Reihe „Kürzlich hinzugefügt in Filme“ wird oben auf der Startseite zu einem grossen Banner mit 6 Filmen:
 
 - Jellyfin liefert der Startseite die bis zu 16 neuesten Filme. Daraus wählt die Slideshow 6 aus.
-- Im Hintergrund ist das Poster des Films zu sehen. Es ist leicht weichgezeichnet, weil Jellyfin für die Startseite nur kleine Poster liefert und kein breites Hintergrundbild.
-- Der „Abspielen“-Knopf und die runden Knöpfe nehmen die Farben des Posters an, so sieht jeder Film anders aus.
+- Das Poster steht gross und scharf am rechten Rand (am Handy oben) und läuft in eine Fläche in der Farbe des Films aus. Die Farbe berechnet der Browser aus dem Poster, ohne Zoom und ohne Weichzeichner.
+- Der „Abspielen“-Knopf und die runden Knöpfe haben dieselbe Filmfarbe, so sieht jeder Film anders aus.
+- Das breite Hintergrundbild, das auf der Detailseite eines Films zu sehen ist, kann die Slideshow nicht zeigen: Jellyfin setzt auf der Startseite nur das Poster in die Seite. Dafür bräuchte es JavaScript.
 - In Browsern mit der CSS-Funktion `random()` (aktuelles Chrome, Edge und Safari) ist die Auswahl und Reihenfolge bei jedem Laden zufällig. Andere Browser zeigen die 6 neuesten.
 - Wechsel alle 7 Sekunden. Solange die Maus darauf ist, bleibt sie stehen.
 - Klick auf Poster oder Titel öffnet den Film, „Abspielen“ startet ihn.
