@@ -46,15 +46,15 @@ Was das Skript macht und was nicht, steht unter [Sicherheit](#sicherheit).
 
 **Docker, offizielles Image `jellyfin/jellyfin`**
 
-1. Neben der `docker-compose.yml` einen Ordner `jellywatch` anlegen und diese zwei Dateien hineinlegen: [`jellywatch.js`](jellywatch.js) und [`extras/jellywatch-inject.sh`](extras/jellywatch-inject.sh).
-2. In der `docker-compose.yml` beim Jellyfin-Dienst die `entrypoint`-Zeile und die zwei Volumes ergänzen:
+1. Neben der `docker-compose.yml` einen Ordner `jellywatch` anlegen und diese zwei Dateien hineinlegen: [`jellywatch.js`](jellywatch.js) und [`extras/jellywatch-inject.sh`](extras/jellywatch-inject.sh). Das zuerst machen, sonst legt Docker beim Start an ihrer Stelle leere Ordner an.
+2. Die `docker-compose.yml` mit einem Editor öffnen (z.B. `nano docker-compose.yml`, das sind keine Befehle fürs Terminal) und beim Jellyfin-Dienst die `entrypoint`-Zeile und die zwei Volumes ergänzen. Die zwei Volume-Zeilen kommen unter dein bestehendes `volumes:`, kein zweites `volumes:` anlegen. Zum Einrücken nur Leerzeichen verwenden, keine Tabs:
 
    ```yaml
    services:
      jellyfin:
        image: jellyfin/jellyfin:latest
        # ... deine bisherigen Einstellungen bleiben ...
-       entrypoint: ["/bin/sh", "/jellywatch/jellywatch-inject.sh", "/jellyfin/jellyfin-web", "/jellyfin/jellyfin"]
+       entrypoint: ["/bin/sh", "-c", "sh /jellywatch/jellywatch-inject.sh /jellyfin/jellyfin-web; exec /jellyfin/jellyfin"]
        volumes:
          # ... deine bisherigen Volumes bleiben ...
          - ./jellywatch/jellywatch.js:/jellyfin/jellyfin-web/jellywatch.js:ro
@@ -67,7 +67,7 @@ Was das Skript macht und was nicht, steht unter [Sicherheit](#sicherheit).
    docker compose up -d
    ```
 
-Bei jedem Start fügt das Skript eine Zeile in die `index.html` von Jellyfin ein, falls sie fehlt, und startet danach Jellyfin wie gewohnt. So funktioniert es auch nach einem Update des Images weiter. Läuft der Container mit `user:` nicht als root, kann das Skript die Datei nicht ändern. Jellyfin startet dann trotzdem normal, nur ohne Slideshow.
+Bei jedem Start fügt das Skript eine Zeile in die `index.html` von Jellyfin ein, falls sie fehlt, und startet danach Jellyfin wie gewohnt. So funktioniert es auch nach einem Update des Images weiter. Fehlt eine der Dateien oder läuft der Container mit `user:` nicht als root, startet Jellyfin trotzdem normal, nur ohne Slideshow. Ob es geklappt hat, zeigt `docker logs jellyfin` mit einer Zeile, die mit `Jellywatch:` beginnt.
 
 **Docker, Image von linuxserver.io**
 
