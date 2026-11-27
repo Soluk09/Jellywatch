@@ -2,17 +2,20 @@
 
 Better Designs for Jellyfin
 
-Ein dunkles Theme für Jellyfin 12. Es besteht nur aus CSS: kein JavaScript, keine Plugins und keine Verbindungen ins Internet.
+Ein Theme für Jellyfin 12. Das Theme selbst ist reines CSS: keine Plugins und keine Verbindungen ins Internet. Dazu gibt es eine **optionale** Slideshow mit den grossen Hintergrundbildern der Filme (`jellywatch.js`).
 
-![Startseite](screenshots/startseite.jpg)
+![Startseite mit Slideshow](screenshots/startseite.jpg)
 
 ## Funktionen
 
-- **Slideshow** oben auf der Startseite: 6 Filme aus den zuletzt hinzugefügten, mit grossem Poster und einem Hintergrund in der Farbe des Films. In Chrome, Edge und Safari wird bei jedem Laden zufällig ausgewählt.
-- Die Knöpfe in der Slideshow übernehmen die **Farben des jeweiligen Films**.
+- **Slideshow** oben auf der Startseite mit 6 zufälligen Filmen: grosses Hintergrundbild, Logo, Beschreibung und Pfeile zum Vor- und Zurückblättern. Das braucht das optionale `jellywatch.js`. Ohne Skript zeigt eine reine CSS-Version die Poster der neuesten Filme.
+- Die Knöpfe in der Slideshow haben die **Farbe des jeweiligen Films**.
+- **Vorschau beim Drüberfahren:** Die Karte wird etwas grösser, Titel, Jahr und Knöpfe erscheinen auf dem Bild.
 - **Sechs Farbvarianten**, passend zu den Theme-Namen von Jellyfin. Jeder Benutzer wählt selbst.
 - Optional ein Knopf **„Anfragen“** für Seerr, ohne API-Key.
 - Angepasst für Computer, Handy und TV.
+
+![Vorschau beim Drüberfahren](screenshots/vorschau.jpg)
 
 | Detailseite | Bibliothek |
 |---|---|
@@ -26,12 +29,94 @@ Ein dunkles Theme für Jellyfin 12. Es besteht nur aus CSS: kein JavaScript, kei
 
 Du brauchst ein Administrator-Konto in Jellyfin.
 
+### 1. Theme (CSS)
+
 1. Öffne [`jellywatch.css`](jellywatch.css), klicke auf „Raw“ und kopiere den ganzen Text.
 2. In Jellyfin: Profilbild oben rechts → **Übersicht** → links **Branding**.
 3. Den Text in das Feld **„Benutzerdefinierter CSS-Code“** einfügen. Alter Inhalt kann ersetzt werden.
 4. **Speichern** und die Seite mit **Strg+F5** neu laden (Mac: Cmd+Shift+R). In der Handy-App die App einmal ganz schliessen.
 
 Das Theme gilt danach für alle Benutzer. Es wird bewusst kopiert und nicht per `@import` geladen. So läuft immer genau der Code, den du eingefügt hast (siehe [SECURITY.md](SECURITY.md)).
+
+### 2. Slideshow mit Hintergrundbildern (optional)
+
+Für die grossen Hintergrundbilder braucht es die kleine Datei [`jellywatch.js`](jellywatch.js). Sie wird einmal auf dem Server in die Weboberfläche von Jellyfin eingebunden und gilt dann für alle Benutzer, auch in den Apps für Android und iOS und im Jellyfin Media Player. Das Theme aus Schritt 1 muss installiert sein.
+
+Was das Skript macht und was nicht, steht unter [Sicherheit](#sicherheit).
+
+**Docker, offizielles Image `jellyfin/jellyfin`**
+
+1. Neben der `docker-compose.yml` einen Ordner `jellywatch` anlegen und diese zwei Dateien hineinlegen: [`jellywatch.js`](jellywatch.js) und [`extras/jellywatch-inject.sh`](extras/jellywatch-inject.sh).
+2. In der `docker-compose.yml` beim Jellyfin-Dienst die `entrypoint`-Zeile und die zwei Volumes ergänzen:
+
+   ```yaml
+   services:
+     jellyfin:
+       image: jellyfin/jellyfin:latest
+       # ... deine bisherigen Einstellungen bleiben ...
+       entrypoint: ["/bin/sh", "/jellywatch/jellywatch-inject.sh", "/jellyfin/jellyfin-web", "/jellyfin/jellyfin"]
+       volumes:
+         # ... deine bisherigen Volumes bleiben ...
+         - ./jellywatch/jellywatch.js:/jellyfin/jellyfin-web/jellywatch.js:ro
+         - ./jellywatch/jellywatch-inject.sh:/jellywatch/jellywatch-inject.sh:ro
+   ```
+
+3. Den Container neu erstellen und danach die Seite mit Strg+F5 neu laden:
+
+   ```bash
+   docker compose up -d
+   ```
+
+Bei jedem Start fügt das Skript eine Zeile in die `index.html` von Jellyfin ein, falls sie fehlt, und startet danach Jellyfin wie gewohnt. So funktioniert es auch nach einem Update des Images weiter. Läuft der Container mit `user:` nicht als root, kann das Skript die Datei nicht ändern. Jellyfin startet dann trotzdem normal, nur ohne Slideshow.
+
+**Docker, Image von linuxserver.io**
+
+1. Die zwei Dateien wie oben in einen Ordner `jellywatch` legen und das Skript ausführbar machen:
+
+   ```bash
+   chmod +x jellywatch/jellywatch-inject.sh
+   ```
+
+2. In der `docker-compose.yml` zwei Volumes ergänzen. linuxserver.io führt Skripte aus `/custom-cont-init.d` bei jedem Start aus:
+
+   ```yaml
+   services:
+     jellyfin:
+       image: lscr.io/linuxserver/jellyfin:latest
+       volumes:
+         # ... deine bisherigen Volumes bleiben ...
+         - ./jellywatch/jellywatch.js:/usr/share/jellyfin/web/jellywatch.js:ro
+         - ./jellywatch/jellywatch-inject.sh:/custom-cont-init.d/jellywatch.sh:ro
+   ```
+
+3. `docker compose up -d`, danach Strg+F5.
+
+**Debian / Ubuntu ohne Docker**
+
+Im Ordner dieses Repositories:
+
+```bash
+sudo cp jellywatch.js /usr/share/jellyfin/web/
+```
+
+```bash
+sudo sh extras/jellywatch-inject.sh /usr/share/jellyfin/web
+```
+
+Ein Jellyfin-Update ersetzt die `index.html`. Danach beide Befehle wiederholen.
+
+**Windows**
+
+1. `jellywatch.js` nach `C:\Program Files\Jellyfin\Server\jellyfin-web\` kopieren.
+2. Die Datei `index.html` im gleichen Ordner mit einem Texteditor als Administrator öffnen und direkt vor `</body>` diese Zeile einfügen:
+
+   ```html
+   <script defer src="jellywatch.js"></script>
+   ```
+
+3. Speichern und die Seite mit Strg+F5 neu laden. Nach jedem Jellyfin-Update wiederholen.
+
+Wenn alles klappt, erscheint oben auf der Startseite die Slideshow mit Pfeilen. Sonst siehe [Häufige Fragen](#häufige-fragen).
 
 ## Farbe wählen
 
@@ -52,20 +137,28 @@ Die Anmeldeseite verwendet immer die Standardfarbe (Dark), weil Jellyfin dort de
 
 ## Slideshow
 
-Die Reihe „Kürzlich hinzugefügt in Filme“ wird oben auf der Startseite zu einem grossen Banner mit 6 Filmen:
+**Mit `jellywatch.js`:**
 
-- Jellyfin liefert der Startseite die bis zu 16 neuesten Filme. Daraus wählt die Slideshow 6 aus.
-- Das Poster steht gross und scharf am rechten Rand (am Handy oben) und läuft in eine Fläche in der Farbe des Films aus. Die Farbe berechnet der Browser aus dem Poster, ohne Zoom und ohne Weichzeichner.
-- Der „Abspielen“-Knopf und die runden Knöpfe haben dieselbe Filmfarbe, so sieht jeder Film anders aus.
-- Das breite Hintergrundbild, das auf der Detailseite eines Films zu sehen ist, kann die Slideshow nicht zeigen: Jellyfin setzt auf der Startseite nur das Poster in die Seite. Dafür bräuchte es JavaScript.
-- In Browsern mit der CSS-Funktion `random()` (aktuelles Chrome, Edge und Safari) ist die Auswahl und Reihenfolge bei jedem Laden zufällig. Andere Browser zeigen die 6 neuesten.
-- Wechsel alle 7 Sekunden. Solange die Maus darauf ist, bleibt sie stehen.
-- Klick auf Poster oder Titel öffnet den Film, „Abspielen“ startet ihn.
-- Ist „Bewegung reduzieren“ im System eingeschaltet, wird nur der neueste Film gezeigt. Im TV-Layout ist die Slideshow aus.
+- 6 zufällige Filme aus der ganzen Bibliothek, wenn möglich noch nicht gesehene. Beim Neuladen der Seite wird neu gemischt. Nach „Zurück“ bleiben dieselben Filme an derselben Stelle.
+- Das grosse Hintergrundbild des Films wie auf der Detailseite, dazu Logo oder Titel, Jahr, Länge, Altersfreigabe, Bewertung, Genres und Beschreibung.
+- Knöpfe „Abspielen“ (bei angefangenen Filmen „Fortsetzen“), „Mehr Infos“ und Favorit. Ein Rechtsklick öffnet das normale Jellyfin-Menü.
+- Beim Drüberfahren erscheinen Pfeile links und rechts. Dazu Punkte unten rechts, die Pfeiltasten und Wischen auf dem Handy.
+- Wechsel alle 7 Sekunden. Pause, solange die Maus darauf ist, ein Menü offen ist oder die Seite nicht sichtbar ist.
+- Die Farbe der Knöpfe wird aus dem Hintergrundbild berechnet, so hat jeder Film seine eigene.
+- Bilder werden erst geladen, wenn sie gebraucht werden.
 
-Voraussetzung: Unter **Einstellungen → Startseite** steht ein Bereich auf **„Kürzlich hinzugefügte Medien“** (Standard), und es gibt eine Bibliothek vom Typ Filme.
+**Nur CSS (ohne Skript):**
 
-Zufällige Filme aus der ganzen Bibliothek (nicht nur aus den neuesten) sind mit reinem CSS nicht möglich, weil Jellyfin der Startseite keine anderen Filme mitgibt.
+![Slideshow nur mit CSS](screenshots/nur-css.jpg)
+
+- Die Reihe „Kürzlich hinzugefügt in Filme“ wird oben zu einem grossen Banner mit 6 Filmen. Jellyfin liefert der Startseite die bis zu 16 neuesten Filme, daraus wählt die Slideshow 6 aus.
+- Das Poster steht gross und scharf am rechten Rand (am Handy oben) und läuft in eine Fläche in der Farbe des Films aus. Die Knöpfe haben dieselbe Filmfarbe.
+- In Browsern mit der CSS-Funktion `random()` (aktuelles Chrome, Edge und Safari) ist die Auswahl bei jedem Laden zufällig. Andere Browser zeigen die 6 neuesten.
+- Wechsel alle 7 Sekunden, Pause solange die Maus darauf ist.
+- Voraussetzung: Unter **Einstellungen → Startseite** steht ein Bereich auf **„Kürzlich hinzugefügte Medien“** (Standard), und es gibt eine Bibliothek vom Typ Filme.
+- Mit reinem CSS gehen weder Pfeile noch Hintergrundbilder noch Filme aus der ganzen Bibliothek, weil Jellyfin der Startseite nur die Poster der neuesten Filme mitgibt. Dafür gibt es `jellywatch.js`.
+
+In beiden Versionen gilt: Ist „Bewegung reduzieren“ im System eingeschaltet, wechselt die Slideshow nicht von selbst. Im TV-Layout ist sie aus.
 
 ## Seerr-Knopf (optional)
 
@@ -123,16 +216,24 @@ Eigene Akzentfarbe, als `#hex` und als `R G B`:
 }
 ```
 
+Die Slideshow mit Hintergrundbildern ausschalten, ohne etwas am Server zu ändern (dann gilt wieder die CSS-Version):
+
+```css
+:root {
+    --jw-js: 0;
+}
+```
+
 Jeder Benutzer kann so etwas auch nur für sich eintragen: **Einstellungen → Anzeige → Benutzerdefinierter CSS-Code**.
 
-Die Slideshow ganz ausschalten: in `jellywatch.css` den Abschnitt „6. SLIDESHOW“ bis zum Beginn von „7. DETAILSEITE“ löschen.
+Die CSS-Slideshow ganz ausschalten: in `jellywatch.css` den Abschnitt „6. SLIDESHOW“ bis zum Beginn von „6b.“ löschen.
 
 ## Kompatibilität
 
-- Jellyfin 12.x, getestet mit 12.4.0.
-- Browser (Chrome, Edge, Firefox, Safari), Jellyfin Media Player und die offiziellen Android- und iOS-Apps, weil diese die Web-Oberfläche nutzen.
-- Ältere Browser ohne `:has()` (z.B. Firefox vor 121, Safari vor 15.4): Theme ja, Slideshow nein.
-- Native Apps (Android TV, Swiftfin, Findroid usw.) laden kein eigenes CSS.
+- Jellyfin 12.x, getestet mit 12.4.0 (offizielles Docker-Image und linuxserver.io).
+- Browser (Chrome, Edge, Firefox, Safari), Jellyfin Media Player und die offiziellen Android- und iOS-Apps, weil diese die Web-Oberfläche vom Server laden. Das gilt für das Theme und für `jellywatch.js`.
+- Ältere Browser ohne `:has()` (z.B. Firefox vor 121, Safari vor 15.4): Theme ja, CSS-Slideshow nein.
+- Native Apps (Android TV, Swiftfin, Findroid usw.) laden weder eigenes CSS noch das Skript.
 - Das Admin-Dashboard bleibt unverändert, weil Jellyfin 12 dort kein eigenes CSS anwendet.
 
 ## Häufige Fragen
@@ -140,7 +241,13 @@ Die Slideshow ganz ausschalten: in `jellywatch.css` den Abschnitt „6. SLIDESHO
 **Es hat sich nichts verändert.**
 Wurde gespeichert? Seite mit Strg+F5 neu laden. Unter Einstellungen → Anzeige darf „Vom Server bereitgestellten, benutzerdefinierten CSS-Code deaktivieren“ nicht angehakt sein.
 
-**Die Slideshow fehlt.**
+**Die Slideshow mit Hintergrundbildern erscheint nicht.**
+- Das Skript läuft nur zusammen mit dem Theme. Ist das CSS aus Schritt 1 installiert?
+- Ist die Zeile eingebunden? Im Browser die Adresse deines Servers mit `/web/index.html` am Ende öffnen, mit Strg+U den Quelltext anzeigen und nach `jellywatch.js` suchen.
+- Mit Strg+F5 neu laden. Falls etwas nicht klappt, steht in der Browser-Konsole (F12) eine Meldung mit `[Jellywatch]`.
+- Es werden nur Filme mit Hintergrundbild gezeigt. Gibt es keine, bleibt die CSS-Version.
+
+**Die CSS-Slideshow fehlt.**
 Prüfe, ob es eine Filme-Bibliothek gibt, ob auf der Startseite „Kürzlich hinzugefügte Medien“ aktiv ist und ob die Filme-Bibliothek dort nicht ausgeschlossen ist.
 
 **Filme auf das Gerät herunterladen?**
@@ -148,12 +255,25 @@ Das kann Jellyfin selbst über ⋮ → Download. Der Admin muss es pro Benutzer 
 
 ## Entfernen
 
-Übersicht → Branding → den Text aus „Benutzerdefinierter CSS-Code“ löschen → Speichern → Strg+F5. Falls benutzt, die eigene `config.json` wieder durch das Original ersetzen.
+- **Theme:** Übersicht → Branding → den Text aus „Benutzerdefinierter CSS-Code“ löschen → Speichern → Strg+F5.
+- **Skript mit Docker:** die `entrypoint`-Zeile (nur beim offiziellen Image) und die zwei Jellywatch-Volumes aus der `docker-compose.yml` löschen und `docker compose up -d` ausführen. Der neue Container hat wieder die originale `index.html`.
+- **Skript ohne Docker:** die Zeile `<script defer src="jellywatch.js"></script>` aus der `index.html` löschen und `jellywatch.js` löschen. Ein Jellyfin-Update stellt die originale `index.html` ebenfalls wieder her.
+- **Seerr-Knopf:** die eigene `config.json` wieder durch das Original ersetzen.
 
 ## Sicherheit
 
-Kein JavaScript, kein `@import`, kein `url()`, keine API-Keys und keine echten Adressen im Repository. Ein GitHub-Workflow prüft das bei jedem Push (`tools/check.py`). Details in [SECURITY.md](SECURITY.md).
+**Theme:** reines CSS. Kein `@import`, kein `url()`, keine API-Keys und keine echten Adressen im Repository.
 
-Die Screenshots zeigen eine Test-Bibliothek mit erfundenen Filmen.
+**`jellywatch.js`:**
+
+- spricht nur mit deinem eigenen Jellyfin-Server und nutzt die Anmeldung, die im Browser schon besteht. Es enthält keine Adressen zu anderen Servern.
+- stellt nur eine lesende Anfrage (6 zufällige Filme). Jeder Benutzer sieht nur Filme, die er sehen darf. Abspielen, Favorit und das Menü erledigt Jellyfins eigener Code.
+- fügt Titel und Beschreibungen nur als Text ein, nie als HTML.
+- speichert nichts und liest keine Passwörter oder Tokens.
+- Wenn etwas schiefgeht, verschwindet die Slideshow und die CSS-Version bleibt.
+
+Ein GitHub-Workflow prüft CSS und Skript bei jedem Push (`tools/check.py`). Details in [SECURITY.md](SECURITY.md).
+
+Die Screenshots zeigen eine Test-Bibliothek mit erfundenen Filmen und selbst gezeichneten Bildern.
 
 Lizenz: [MIT](LICENSE)
